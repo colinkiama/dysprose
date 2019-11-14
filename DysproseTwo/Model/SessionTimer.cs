@@ -9,6 +9,8 @@ namespace DysproseTwo.Model
 {
     public class SessionTimer
     {
+        public event EventHandler<TimeSpan> TimerTicked;
+        public event EventHandler TimerEnded;
         DispatcherTimer timer;
         int timesTicked = 0;
         int timesToTick = 0;
@@ -25,12 +27,23 @@ namespace DysproseTwo.Model
 
         private void Timer_Tick(object sender, object e)
         {
-            timesToTick++;
+            timesTicked++;
+            if (timesTicked > timesToTick)
+            {
+                timer.Stop();
+                TimerEnded?.Invoke(sender, EventArgs.Empty);
+            }
+            else
+            {
+                TimeSpan timeElapsed = timer.Interval * timesTicked;
+                TimerTicked?.Invoke(this, timeElapsed);
+            }
+            
         }
 
         public bool StartTimer()
         {
-            bool willStart = timesTicked > timesToTick;
+            bool willStart = timesToTick > timesTicked;
             if (willStart)
             {
                 timer.Start();

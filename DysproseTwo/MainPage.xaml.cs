@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DysproseTwo.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,27 @@ namespace DysproseTwo
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        MainPageViewModel ViewModel = new MainPageViewModel();
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+
+        private void TimerButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (ViewModel.CurrentSession.State)
+            {
+                case Enums.SessionState.InProgress:
+                    ViewModel.CurrentSession.PauseSession();
+                    break;
+                case Enums.SessionState.Paused:
+                    ViewModel.CurrentSession.StartSession();
+                    break;
+                case Enums.SessionState.Stopped:
+                    ViewModel.CurrentSession.StartSession();
+                    break;
+            }
         }
     }
 }
