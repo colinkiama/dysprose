@@ -34,13 +34,13 @@ namespace DysproseTwo
         {
             switch (ViewModel.CurrentSession.State)
             {
-                case Enums.SessionState.InProgress:
+                case Enums.DysproseSessionState.InProgress:
                     ViewModel.CurrentSession.PauseSession();
                     break;
-                case Enums.SessionState.Paused:
+                case Enums.DysproseSessionState.Paused:
                     ViewModel.CurrentSession.StartSession();
                     break;
-                case Enums.SessionState.Stopped:
+                case Enums.DysproseSessionState.Stopped:
                     ViewModel.CurrentSession.StartSession();
                     break;
             }

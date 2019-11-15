@@ -119,7 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Enums\SessionState.cs" />
+    <Compile Include="Enums\DysproseSessionState.cs" />
     <Compile Include="Enums\TimeUnit.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -127,7 +127,7 @@
     <Compile Include="Model\Session.cs" />
     <Compile Include="Model\SessionTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Structs\SessionSettings.cs" />
+    <Compile Include="Structs\DysproseSessionSettings.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

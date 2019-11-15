@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DysproseTwo.Enums
 {
-    public enum SessionState
+    public enum DysproseSessionState
     {
         InProgress,
         Paused,

@@ -79,7 +79,6 @@ namespace DysproseTwo
 
         private void ExtendViewIntoTitleBar()
         {
-
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
             ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;

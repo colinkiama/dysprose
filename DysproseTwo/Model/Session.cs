@@ -11,15 +11,20 @@ namespace DysproseTwo.Model
 {
     public class Session
     {
-        public SessionSettings Settings;
-        public string TextData;
-        public SessionTimer Timer;
-        public SessionState State;
+        private DysproseSessionSettings settings;
+        private string textData;
+        private SessionTimer timer;
+        private DysproseSessionState state;
+
+        public DysproseSessionSettings Settings { get => settings; set => settings = value; }
+        public string TextData { get => textData; set => textData = value; }
+        public SessionTimer Timer { get => timer; set => timer = value; }
+        public DysproseSessionState State { get => state; set => state = value; }
 
         public Session()
         {
-            Settings = new SessionSettings { FontSize = 15, SessionLength = new TimeSpan(0, 1, 0) };
-            State = SessionState.Stopped;
+            Settings = new DysproseSessionSettings { FontSize = 15, SessionLength = new TimeSpan(0, 1, 0) };
+            State = DysproseSessionState.Stopped;
             Timer = new SessionTimer(Settings.SessionLength);
         }
 
@@ -28,7 +33,7 @@ namespace DysproseTwo.Model
             bool hasStarted = Timer.StartTimer();
             if (hasStarted)
             {
-                State = SessionState.InProgress;
+                State = DysproseSessionState.InProgress;
             }
             return hasStarted;
         }
@@ -36,7 +41,7 @@ namespace DysproseTwo.Model
         public void PauseSession()
         {
             Timer.PauseTimer();
-            State = SessionState.Paused;
+            State = DysproseSessionState.Paused;
         }
     }
 }
