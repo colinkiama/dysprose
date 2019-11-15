@@ -22,7 +22,8 @@ namespace DysproseTwo.Model
             timesTicked = 0;
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 0, 0, 250);
-            timesToTick = (int)Math.Ceiling(sessionTime / timer.Interval);
+
+            timesToTick = (int)Math.Ceiling(sessionTime.TotalSeconds / timer.Interval.TotalSeconds);
         }
 
         private void Timer_Tick(object sender, object e)
@@ -35,7 +36,7 @@ namespace DysproseTwo.Model
             }
             else
             {
-                TimeSpan timeElapsed = timer.Interval * timesTicked;
+                TimeSpan timeElapsed = TimeSpan.FromSeconds(timer.Interval.TotalSeconds * timesTicked);
                 TimerTicked?.Invoke(this, timeElapsed);
             }
             
