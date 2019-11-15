@@ -61,11 +61,11 @@ namespace DysproseTwo
         {
             if (FadeTextBox.Text.Length > 0)
             {
-                await ViewModel.FadeTimerService.StartAsync();
+                await ViewModel.FadeTimerService.StartAsync().ConfigureAwait(true);
             }
             else
             {
-                await ViewModel.FadeTimerService.StopAsync();
+                await ViewModel.FadeTimerService.StopAsync().ConfigureAwait(true);
             }
         }
     }

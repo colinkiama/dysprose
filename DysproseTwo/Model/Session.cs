@@ -22,10 +22,11 @@ namespace DysproseTwo.Model
         public SessionTimer Timer { get => timer; set => timer = value; }
         public DysproseSessionState State { get => state; set => state = value; }
 
+        public event EventHandler<double> FontSizeUpdated;
 
         public Session()
         {
-            Settings = new DysproseSessionSettings { FontSize = 15, SessionLength = new TimeSpan(0, 1, 0), FadeInterval = 5 };
+            Settings = new DysproseSessionSettings { SessionLength = new TimeSpan(0, 1, 0), FadeInterval = 5 };
             State = DysproseSessionState.Stopped;
             Timer = new SessionTimer(Settings.SessionLength);
         }
@@ -38,6 +39,19 @@ namespace DysproseTwo.Model
                 State = DysproseSessionState.InProgress;
             }
             return hasStarted;
+        }
+
+        public void UpdateFont(double updatedFontSize)
+        {
+            var oldSettings = Settings;
+            Settings = new DysproseSessionSettings { FadeInterval = 5, SessionLength = oldSettings.SessionLength };
+            FontSizeUpdated?.Invoke(this, updatedFontSize);
+        }
+
+        public void UpdateFadeInterval(int updatedFadeInterval)
+        {
+            var oldSettings = Settings;
+            Settings = new DysproseSessionSettings { FadeInterval = updatedFadeInterval, SessionLength = oldSettings.SessionLength };
         }
 
         public void PauseSession()

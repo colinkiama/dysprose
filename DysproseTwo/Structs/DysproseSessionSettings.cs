@@ -10,10 +10,8 @@ namespace DysproseTwo.Structs
     public struct DysproseSessionSettings : IEquatable<DysproseSessionSettings>
     {
         private TimeSpan _sessionLength;
-        private double _fontSize;
         private int _fadeInterval;
 
-        public double FontSize { get => _fontSize; set => _fontSize = value; }
         public TimeSpan SessionLength { get => _sessionLength; set => _sessionLength = value; }
         public int FadeInterval { get => _fadeInterval; set => _fadeInterval = value; }
 
@@ -23,7 +21,7 @@ namespace DysproseTwo.Structs
             bool isEqual = false;
             if (other is DysproseSessionSettings otherSettings)
             {
-                isEqual = this._fontSize == otherSettings._fontSize && this._sessionLength == otherSettings._sessionLength
+                isEqual = this._sessionLength == otherSettings._sessionLength
                     && this._fadeInterval == otherSettings._fadeInterval;
             }
             return isEqual;
@@ -33,7 +31,6 @@ namespace DysproseTwo.Structs
         {
             int hash = 13;
             hash = (hash * 7) + _sessionLength.GetHashCode();
-            hash = (hash * 7) + _fontSize.GetHashCode();
             hash = (hash * 7) + _fadeInterval.GetHashCode();
 
             return hash;

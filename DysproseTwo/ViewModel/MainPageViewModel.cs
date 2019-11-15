@@ -18,6 +18,7 @@ namespace DysproseTwo.ViewModel
         private TimeSpan _currentSessionTime;
 
         private FadeTimerService _fadeTimerService;
+        
         public TimeSpan CurrentSessionTime
         {
             get { return _currentSessionTime; }
@@ -28,6 +29,8 @@ namespace DysproseTwo.ViewModel
             }
         }
 
+        
+        public FadeTimerService FadeTimerService { get => _fadeTimerService; private set => _fadeTimerService = value; }
 
         private Session _session;
 
@@ -41,7 +44,6 @@ namespace DysproseTwo.ViewModel
             }
         }
 
-        public FadeTimerService FadeTimerService { get => _fadeTimerService; set => _fadeTimerService = value; }
 
         public MainPageViewModel()
         {

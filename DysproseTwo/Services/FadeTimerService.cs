@@ -44,7 +44,7 @@ namespace DysproseTwo.Services
                 CancelAndRemoveAnimation(_animations[i]);
             }
 
-            await ShowControlAsync();
+            await ShowControlAsync().ConfigureAwait(false);
         }
 
         private void CancelAndRemoveAnimation(AnimationSet animationSet)
@@ -62,14 +62,14 @@ namespace DysproseTwo.Services
                 FadeCompleted?.Invoke(sender, e);
                 animSet.Completed -= FadeCompleted;
                 _animations.Remove(animSet);
-                await ShowControlAsync();
+                await ShowControlAsync().ConfigureAwait(false);
             }
 
         }
 
         private async Task ShowControlAsync()
         {
-            await _controlToFade.Fade(1, 0).StartAsync();
+            await _controlToFade.Fade(1, 0).StartAsync().ConfigureAwait(true);
         }
     }
 }

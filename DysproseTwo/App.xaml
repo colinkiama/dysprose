@@ -20,6 +20,8 @@
                         </ResourceDictionary>
                     </ResourceDictionary.ThemeDictionaries>
                 </ResourceDictionary>
+
+                <ResourceDictionary Source="ms-appx:///Styles/DysprosePageDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             
