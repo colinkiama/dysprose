@@ -248,12 +248,22 @@
 
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-        <TextBlock Text="Heyyy there ;)"/>
-        <TextBox Width="200"
-                 Height="200"
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBox Background="Transparent"
                  AcceptsReturn="True"
-                 TextWrapping="Wrap"></TextBox>
-        <Button Content="Hello"/>
+                 TextWrapping="Wrap"
+                 BorderThickness="0"
+                 Grid.Row="1"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 PlaceholderText="Start writing here..."></TextBox>
+        
     </Grid> 
 
 
