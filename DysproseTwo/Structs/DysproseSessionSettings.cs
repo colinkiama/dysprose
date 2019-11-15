@@ -20,7 +20,7 @@ namespace DysproseTwo.Structs
             bool isEqual = false;
             if (other is DysproseSessionSettings otherSettings)
             {
-                isEqual = this.FontSize == otherSettings.FontSize && this.SessionLength == otherSettings.sessionLength;
+                isEqual = this.fontSize == otherSettings.fontSize && this.sessionLength == otherSettings.sessionLength;
             }
             return isEqual;
         }

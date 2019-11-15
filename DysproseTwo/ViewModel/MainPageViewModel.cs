@@ -54,10 +54,9 @@ namespace DysproseTwo.ViewModel
             CurrentSessionTime = new TimeSpan(0);
         }
 
-        private void Timer_TimerTicked(object sender, TimeSpan e)
+        private void Timer_TimerTicked(object sender, TimeSpan timeElapsed)
         {
-            // e = Time elapsed
-            CurrentSessionTime = _sessionLength - e;
+            CurrentSessionTime = _sessionLength - timeElapsed;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
