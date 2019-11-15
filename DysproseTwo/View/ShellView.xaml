@@ -50,7 +50,8 @@
                     Name="MenuButton"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
-                Grid.Row="1">
+                Grid.Row="1"
+                    Click="MenuButton_Click">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
             </Button>
         </Grid>
