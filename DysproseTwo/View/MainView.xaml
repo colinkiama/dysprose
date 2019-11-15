@@ -254,6 +254,32 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        <RelativePanel>
+            <Button Background="Transparent">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
+            </Button>
+
+            <CommandBar RelativePanel.AlignHorizontalCenterWithPanel="True"
+                        Background="Transparent">
+                <AppBarButton Icon="Pause"
+                              Label="Pause"
+                              Name="PausePlayAppBarButton"/>
+                <AppBarButton Icon="Stop"
+                              Label="Stop"
+                              Name="StopAppBarButton"/>
+                <AppBarButton Icon="Refresh"
+                              Label="Restart"
+                              Name="RestartAppBarButton"/>
+            </CommandBar>
+
+
+            <Ellipse Fill="{ThemeResource SystemAccentColor}"
+                     Width="32"
+                     Height="32"
+                     RelativePanel.AlignRightWithPanel="True"/>
+        </RelativePanel>
+        
+        
         
         <TextBox Background="Transparent"
                  AcceptsReturn="True"
@@ -262,8 +288,13 @@
                  Grid.Row="1"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Stretch"
-                 PlaceholderText="Start writing here..."></TextBox>
-        
+                 PlaceholderText="Start writing here..."
+                 Margin="0,20,0,0"></TextBox>
+
+        <TextBlock Grid.Row="2"
+                   Name="WordCountTextBlock"
+                   Text="2 Words"
+                   Margin="0,8"/>
     </Grid> 
 
 
