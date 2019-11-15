@@ -1,6 +1,7 @@
 ﻿using Microsoft.Toolkit.Uwp.UI.Animations;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +14,8 @@ namespace DysproseTwo.Services
     {
         public event EventHandler<AnimationSetCompletedEventArgs> FadeCompleted;
         List<AnimationSet> _animations = new List<AnimationSet>();
-        // Seconds to milliseconds conversion (seconds * 1000)
         float _fadeAnimationTime = 0;
         const uint MillisecondsInSeconds = 1000;
-        //const float ShowAnimationTime = 300f;
 
         FrameworkElement _controlToFade;
 
@@ -45,23 +44,32 @@ namespace DysproseTwo.Services
                 CancelAndRemoveAnimation(_animations[i]);
             }
 
-            await _controlToFade.Fade(1, 0).StartAsync().ConfigureAwait(true);
+            await ShowControlAsync();
         }
 
         private void CancelAndRemoveAnimation(AnimationSet animationSet)
-        {
+         {
+            animationSet.Dispose();
             animationSet.Completed -= FadeCompleted;
             _animations.Remove(animationSet);
+            
         }
 
-        private void Fade_Completed(object sender, AnimationSetCompletedEventArgs e)
+        private async void Fade_Completed(object sender, AnimationSetCompletedEventArgs e)
         {
             if (sender is AnimationSet animSet)
             {
                 FadeCompleted?.Invoke(sender, e);
-                CancelAndRemoveAnimation(animSet);
+                animSet.Completed -= FadeCompleted;
+                _animations.Remove(animSet);
+                await ShowControlAsync();
             }
 
+        }
+
+        private async Task ShowControlAsync()
+        {
+            await _controlToFade.Fade(1, 0).StartAsync();
         }
     }
 }

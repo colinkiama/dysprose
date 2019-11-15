@@ -33,7 +33,14 @@ namespace DysproseTwo
         {
             base.OnNavigatedTo(e);
             ViewModel.ObtainFadeElement(FadeTextBox);
+            ViewModel.FadeTimerService.FadeCompleted += FadeTimerService_FadeCompleted;
         }
+
+        private void FadeTimerService_FadeCompleted(object sender, Microsoft.Toolkit.Uwp.UI.Animations.AnimationSetCompletedEventArgs e)
+        {
+            FadeTextBox.Text = "";
+        }
+
         private async void TimerButton_Click(object sender, RoutedEventArgs e)
         {
             switch (ViewModel.CurrentSession.State)
@@ -52,7 +59,7 @@ namespace DysproseTwo
 
         private async void FadeTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            await ViewModel.ResetFadeAsync();
+            await ViewModel.FadeTimerService.StartAsync();
         }
     }
 }

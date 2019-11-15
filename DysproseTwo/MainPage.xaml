@@ -16,6 +16,7 @@
                     Click="TimerButton_Click"/>
             <TextBox Height="200"
                        Width="200"
+                     TextWrapping="Wrap"
                        HorizontalAlignment="Left"
                        PlaceholderText="Write here ;)"
                        x:Name="FadeTextBox"

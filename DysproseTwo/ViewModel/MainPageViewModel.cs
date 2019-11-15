@@ -17,7 +17,7 @@ namespace DysproseTwo.ViewModel
 
         private TimeSpan _currentSessionTime;
 
-        private FadeTimerService fadeTimerService;
+        private FadeTimerService _fadeTimerService;
         public TimeSpan CurrentSessionTime
         {
             get { return _currentSessionTime; }
@@ -41,6 +41,8 @@ namespace DysproseTwo.ViewModel
             }
         }
 
+        public FadeTimerService FadeTimerService { get => _fadeTimerService; set => _fadeTimerService = value; }
+
         public MainPageViewModel()
         {
             CurrentSession = new Session();
@@ -53,29 +55,29 @@ namespace DysproseTwo.ViewModel
         internal async Task ResumeAsync()
         {
             CurrentSession.StartSession();
-            await fadeTimerService.StartAsync().ConfigureAwait(true);
+            await FadeTimerService.StartAsync().ConfigureAwait(true);
         }
 
         internal async Task StartAsync()
         {
             CurrentSession.StartSession();
-            await fadeTimerService.StartAsync().ConfigureAwait(true);
+            await FadeTimerService.StartAsync().ConfigureAwait(true);
         }
 
         internal async Task PauseAsync()
         {
             CurrentSession.PauseSession();
-            await fadeTimerService.StopAsync().ConfigureAwait(true);
+            await FadeTimerService.StopAsync().ConfigureAwait(true);
         }
 
         internal async Task ResetFadeAsync()
         {
-            await fadeTimerService.StartAsync().ConfigureAwait(true);
+            await FadeTimerService.StartAsync().ConfigureAwait(true);
         }
 
         public void ObtainFadeElement(FrameworkElement elementToFade)
         {
-            fadeTimerService = new FadeTimerService(elementToFade, CurrentSession.Settings.FadeInterval);
+            FadeTimerService = new FadeTimerService(elementToFade, CurrentSession.Settings.FadeInterval);
         }
         private void Timer_TimerEnded(object sender, EventArgs e)
         {
