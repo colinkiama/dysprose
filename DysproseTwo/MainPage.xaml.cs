@@ -59,7 +59,14 @@ namespace DysproseTwo
 
         private async void FadeTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            await ViewModel.FadeTimerService.StartAsync();
+            if (FadeTextBox.Text.Length > 0)
+            {
+                await ViewModel.FadeTimerService.StartAsync();
+            }
+            else
+            {
+                await ViewModel.FadeTimerService.StopAsync();
+            }
         }
     }
 }
