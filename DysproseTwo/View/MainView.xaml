@@ -221,43 +221,14 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
         </Grid.Resources>    
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup>
-                <VisualState x:Name="Mobile">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-
-                    <VisualState.Setters>
-                        <Setter Target="RootGrid.Style" Value="{StaticResource DysproseRootGridStyle}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-                <VisualState x:Name="Desktop">
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1008"/>
-                    </VisualState.StateTriggers>
-
-                    <VisualState.Setters>
-                        <Setter Target="RootGrid.Style" Value="{StaticResource DysproseDesktopRootGridStyle}"/>
-                    </VisualState.Setters>
-                </VisualState>
-
-
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
+       
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <RelativePanel>
-            <Button Background="Transparent">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
-            </Button>
 
             <CommandBar RelativePanel.AlignHorizontalCenterWithPanel="True"
                         Background="Transparent">

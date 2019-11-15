@@ -26,5 +26,13 @@ namespace DysproseTwo.View
         {
             this.InitializeComponent();
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            MainFrame.Navigate(typeof(MainView));
+            SettingsFrame.Navigate(typeof(SettingsView));
+            SettingsFrame.Visibility = Visibility.Collapsed;
+        }
     }
 }

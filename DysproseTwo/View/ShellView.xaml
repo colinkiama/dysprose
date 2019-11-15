@@ -8,7 +8,51 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
 
+                    <VisualState.Setters>
+                        <Setter Target="RootGrid.Style" Value="{StaticResource DysproseRootGridStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1008"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="RootGrid.Style" Value="{StaticResource DysproseDesktopRootGridStyle}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Dysprose" Name="TitleBarTextBlock"
+                   Margin="16,12,0,0"
+                   FontSize="12"/>
+        
+        
+        <Grid Name="RootGrid" Grid.Row="1">
+            <Frame x:Name="MainFrame" />
+            <Frame x:Name="SettingsFrame"/>
+            <Button Background="Transparent"
+                    Name="MenuButton"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Grid.Row="1">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE700;" />
+            </Button>
+        </Grid>
     </Grid>
 </Page>
