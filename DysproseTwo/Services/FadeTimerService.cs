@@ -14,51 +14,28 @@ namespace DysproseTwo.Services
         public event EventHandler<AnimationSetCompletedEventArgs> FadeCompleted;
         List<AnimationSet> _animations = new List<AnimationSet>();
         // Seconds to milliseconds conversion (seconds * 1000)
-        const float FadeAnimationTime = 5f * 1000;
+        float _fadeAnimationTime = 0;
+        const uint MillisecondsInSeconds = 1000;
         //const float ShowAnimationTime = 300f;
 
         FrameworkElement _controlToFade;
 
 
-        public FadeTimerService(FrameworkElement controlToFade)
+        public FadeTimerService(FrameworkElement controlToFade, int secondsBeforeFading)
         {
             _controlToFade = controlToFade;
+            _fadeAnimationTime = secondsBeforeFading * MillisecondsInSeconds;
         }
 
         public async Task StartAsync()
         {
-            int count = _animations.Count;
-            if (count > 0)
-            {
-                List<AnimationSet> animationsToRemove = new List<AnimationSet>();
-                for (int i = 0; i < count; i++)
-                {
-                    _animations[i].Completed -= Fade_Completed;
-                    _animations[i].Stop();
-                    animationsToRemove.Add(_animations[i]);
-                }
-                int deleteCount = animationsToRemove.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    _animations.Remove(animationsToRemove[i]);
-                }
-                animationsToRemove.Clear();
-            }
-
-
-
-            await _controlToFade.Fade(1, 0).StartAsync().ConfigureAwait(true);
-
-
-
-            double duration = FadeAnimationTime;
+            await StopAsync().ConfigureAwait(true);
+            double duration = _fadeAnimationTime;
             var fade = _controlToFade.Fade(0, duration / 2, duration / 2);
             fade.Completed += Fade_Completed;
             _animations.Add(fade);
             await fade.StartAsync().ConfigureAwait(false);
-
         }
-
 
         public async Task StopAsync()
         {

@@ -14,6 +14,12 @@
             <Button Content="TimerButton"
                     Name="TimerButton"
                     Click="TimerButton_Click"/>
+            <TextBox Height="200"
+                       Width="200"
+                       HorizontalAlignment="Left"
+                       PlaceholderText="Write here ;)"
+                       x:Name="FadeTextBox"
+                     TextChanged="FadeTextBox_TextChanged"/>
         </StackPanel>
     </Grid>
 </Page>

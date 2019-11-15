@@ -29,21 +29,30 @@ namespace DysproseTwo
             this.InitializeComponent();
         }
 
-
-        private void TimerButton_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            ViewModel.ObtainFadeElement(FadeTextBox);
+        }
+        private async void TimerButton_Click(object sender, RoutedEventArgs e)
         {
             switch (ViewModel.CurrentSession.State)
             {
                 case Enums.DysproseSessionState.InProgress:
-                    ViewModel.CurrentSession.PauseSession();
+                    await ViewModel.PauseAsync().ConfigureAwait(true);
                     break;
                 case Enums.DysproseSessionState.Paused:
-                    ViewModel.CurrentSession.StartSession();
+                    await ViewModel.ResumeAsync().ConfigureAwait(true);
                     break;
                 case Enums.DysproseSessionState.Stopped:
-                    ViewModel.CurrentSession.StartSession();
+                    await ViewModel.StartAsync().ConfigureAwait(true);
                     break;
             }
+        }
+
+        private async void FadeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            await ViewModel.ResetFadeAsync();
         }
     }
 }

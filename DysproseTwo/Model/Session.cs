@@ -15,15 +15,17 @@ namespace DysproseTwo.Model
         private string textData;
         private SessionTimer timer;
         private DysproseSessionState state;
+        
 
         public DysproseSessionSettings Settings { get => settings; set => settings = value; }
         public string TextData { get => textData; set => textData = value; }
         public SessionTimer Timer { get => timer; set => timer = value; }
         public DysproseSessionState State { get => state; set => state = value; }
 
+
         public Session()
         {
-            Settings = new DysproseSessionSettings { FontSize = 15, SessionLength = new TimeSpan(0, 1, 0) };
+            Settings = new DysproseSessionSettings { FontSize = 15, SessionLength = new TimeSpan(0, 1, 0), FadeInterval = 5 };
             State = DysproseSessionState.Stopped;
             Timer = new SessionTimer(Settings.SessionLength);
         }
