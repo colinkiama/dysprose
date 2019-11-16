@@ -7,17 +7,45 @@ using System.Threading.Tasks;
 
 namespace DysproseTwo.Services
 {
-    public static class SettingsService
+    public class SettingsService
     {
-        public static void UpdateSessionSettings(DysproseSessionSettings sessionSettings)
+        public DysproseSessionSettings SessionSettings { get => _sessionSettings; set => _sessionSettings = value; }
+        public DysproseGlobalSettings GlobalSettings { get => _globalSettings; set => _globalSettings = value; }
+
+        private DysproseSessionSettings _sessionSettings;
+
+        private DysproseGlobalSettings _globalSettings;
+
+        public event EventHandler<DysproseSessionSettings> SessionSettingsUpdated;
+        public event EventHandler<DysproseGlobalSettings> GlobalSettingsUpdated;
+
+        // Singleton Pattern with "Lazy"
+        private SettingsService _settingsService = null;
+        private static Lazy<SettingsService> lazy =
+            new Lazy<SettingsService>(() => new SettingsService());
+
+        public static SettingsService Instance => lazy.Value;
+
+        private SettingsService() { }
+
+        public void UpdateSessionSettings(DysproseSessionSettings sessionSettings)
         {
-            
+            if (sessionSettings != _sessionSettings)
+            {
+                sessionSettings = _sessionSettings;
+                SessionSettingsUpdated?.Invoke(this, sessionSettings);
+            }
         }
 
-        public static void UpdateGlobalSettings(DysproseGlobalSettings globalSessionSettings)
+        public void UpdateGlobalSettings(DysproseGlobalSettings globalSettings)
         {
-
+            if (globalSettings != _globalSettings)
+            {
+                globalSettings = _globalSettings;
+                GlobalSettingsUpdated?.Invoke(this, globalSettings);
+            }
         }
-        public static event EventHandler SettingsUpdated;
+
+
     }
 }
