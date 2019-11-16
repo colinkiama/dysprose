@@ -44,9 +44,9 @@ namespace DysproseTwo.Helpers
         {
             // y = mx + c
 
-            float m = 0.3f;
+            float m = 0.25f;
             float x = (float)scale;
-            float c = 0.7f;
+            float c = 0.75f;
 
             float y = m * x + c;
 
