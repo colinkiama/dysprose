@@ -11,6 +11,9 @@ namespace DysproseTwo.Helpers
 {
     public static class AnimationHelper
     {
+        // Duration in milliseconds
+        const float defaultAnimationDuration = 500;
+        const double baseWidth = 400;
         static List<AnimationSet> _runningFrameAnimations = new List<AnimationSet>();
 
         public static event EventHandler FrameSlideOutAnimationCompleted;
@@ -19,14 +22,35 @@ namespace DysproseTwo.Helpers
         {
             StopAndClearRunningFrameAnimations();
             float windowWidth = GetWindowWidth();
+            float animDuration = CalculateAnimationDuration(windowWidth);
+
             await frame.Offset(-windowWidth, 0, 0).StartAsync();
             frame.Visibility = Visibility.Visible;
             
             
-            var slideInAnim = frame.Offset(0);
+            var slideInAnim = frame.Offset(0, duration:animDuration);
             slideInAnim.Completed += SlideInAnim_Completed;
             _runningFrameAnimations.Add(slideInAnim);
             await slideInAnim.StartAsync();
+        }
+
+        private static float CalculateAnimationDuration(float windowWidth)
+        {
+            
+            return defaultAnimationDuration * SlideAnimationFunction(windowWidth/baseWidth);
+        }
+
+        private static float SlideAnimationFunction(double scale)
+        {
+            // y = mx + c
+
+            float m = 0.3f;
+            float x = (float)scale;
+            float c = 0.7f;
+
+            float y = m * x + c;
+
+            return y;
         }
 
         private static void SlideInAnim_Completed(object sender, AnimationSetCompletedEventArgs e)
@@ -47,7 +71,8 @@ namespace DysproseTwo.Helpers
         {
             StopAndClearRunningFrameAnimations();
             float windowWidth = GetWindowWidth();
-            var slideOutAnim = frame.Offset(-windowWidth);
+            float animDuration = CalculateAnimationDuration(windowWidth);
+            var slideOutAnim = frame.Offset(-windowWidth, duration:animDuration);
             slideOutAnim.Completed += SlideOutAnim_Completed;
             _runningFrameAnimations.Add(slideOutAnim);
             await slideOutAnim.StartAsync();
