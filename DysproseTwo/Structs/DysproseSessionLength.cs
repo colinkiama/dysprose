@@ -9,20 +9,33 @@ namespace DysproseTwo.Structs
 {
     public struct DysproseSessionLength : IEquatable<DysproseSessionLength>
     {
-        private int length;
-        private TimeUnit unitOfLength;
+        private int _length;
+        private TimeUnit _unitOfLength;
 
-        public int Length { get => length; set => length = value; }
-        public TimeUnit UnitOfLength { get => unitOfLength; set => unitOfLength = value; }
+        public int Length { get => _length; set => _length = value; }
+        public TimeUnit UnitOfLength { get => _unitOfLength; set => _unitOfLength = value; }
+        public bool Equals(DysproseSessionLength other)
+        {
+            return this._length == other._length && this._unitOfLength == other._unitOfLength;
+        }
 
         public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            bool isEqual = false;
+            if (obj is DysproseSessionLength other)
+            {
+                isEqual = this.Equals(other);
+            }
+            return isEqual;
         }
 
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            int hash = 13;
+            hash = (hash * 7) + _length.GetHashCode();
+            hash = (hash * 7) + _unitOfLength.GetHashCode();
+
+            return hash;
         }
 
         public static bool operator ==(DysproseSessionLength left, DysproseSessionLength right)
@@ -35,9 +48,5 @@ namespace DysproseTwo.Structs
             return !(left == right);
         }
 
-        public bool Equals(DysproseSessionLength other)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

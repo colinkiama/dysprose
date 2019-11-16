@@ -51,7 +51,7 @@ namespace DysproseTwo.Structs
             bool isEqual = false;
             if (obj is DysproseSessionSettings otherSettings)
             {
-                 isEqual = this.Equals(obj);
+                 isEqual = this.Equals(otherSettings);
             }
 
             return isEqual;
