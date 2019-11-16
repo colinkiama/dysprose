@@ -14,11 +14,13 @@ namespace DysproseTwo.Structs
 
         public int Length { get => _length; set => _length = value; }
         public TimeUnit UnitOfLength { get => _unitOfLength; set => _unitOfLength = value; }
+
         public bool Equals(DysproseSessionLength other)
         {
             return this._length == other._length && this._unitOfLength == other._unitOfLength;
         }
 
+        public double TimeInMilliseconds => GetTimeInMilliseconds();
         public override bool Equals(object obj)
         {
             bool isEqual = false;
@@ -48,7 +50,7 @@ namespace DysproseTwo.Structs
             return !(left == right);
         }
 
-        public double GetTimeInMilliseconds()
+        private double GetTimeInMilliseconds()
         {
             return _length * (int)_unitOfLength;
         }

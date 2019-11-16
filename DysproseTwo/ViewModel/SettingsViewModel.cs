@@ -1,4 +1,6 @@
 ﻿using DysproseTwo.Enums;
+using DysproseTwo.Services;
+using DysproseTwo.Structs;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,6 +12,22 @@ namespace DysproseTwo.ViewModel
 {
     class SettingsViewModel : Notifier
     {
+
+        private int _sessionLength;
+
+        public int SessionLength
+        {
+            get { return _sessionLength; }
+            set
+            {
+                if (_sessionLength != value)
+                {
+                    _sessionLength = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
 
         private int _fadeIntervalValue;
 
@@ -23,7 +41,7 @@ namespace DysproseTwo.ViewModel
                     _fadeIntervalValue = value;
                     NotifyPropertyChanged();
                 }
-                
+
             }
         }
 
@@ -68,5 +86,51 @@ namespace DysproseTwo.ViewModel
         {
             TimeUnit.Seconds, TimeUnit.Minutes, TimeUnit.Hours
         };
+
+
+        public SettingsViewModel()
+        {
+
+        }
+
+
+        public void GetSettings()
+        {
+            var sessionSettings = SettingsService.Instance.SessionSettings;
+            var globalSettings = SettingsService.Instance.GlobalSettings;
+
+            AddSessionSettingsToViewModel(sessionSettings);
+            AddGlobalSettingsToViewModel(globalSettings);
+        }
+
+        public void SetSettings()
+        {
+            var sessionSettings = GetSessionSettingsFromViewModel();
+            var globalSettings = GetGlobalSettingsFromViewModel();
+
+            SettingsService.Instance.UpdateSessionSettings(sessionSettings);
+            SettingsService.Instance.UpdateGlobalSettings(globalSettings);
+        }
+
+        private DysproseGlobalSettings GetGlobalSettingsFromViewModel() => new DysproseGlobalSettings { FontSize = this.FontSize };
+
+        private DysproseSessionSettings GetSessionSettingsFromViewModel() => new DysproseSessionSettings
+        {
+            FadeInterval = FadeIntervalValue,
+            SessionLength = new DysproseSessionLength { Length = SessionLength, UnitOfLength = SelectedTimeUnit }
+        };
+
+
+        private void AddGlobalSettingsToViewModel(DysproseGlobalSettings globalSettings)
+        {
+            FontSize = globalSettings.FontSize;
+        }
+
+        private void AddSessionSettingsToViewModel(DysproseSessionSettings sessionSettings)
+        {
+            FadeIntervalValue = sessionSettings.FadeInterval;
+            SessionLength = sessionSettings.SessionLength.Length;
+            SelectedTimeUnit = sessionSettings.SessionLength.UnitOfLength;
+        }
     }
 }

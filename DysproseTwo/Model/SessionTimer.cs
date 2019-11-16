@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DysproseTwo.Structs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +17,14 @@ namespace DysproseTwo.Model
         int timesToTick = 0;
 
 
-        public SessionTimer(TimeSpan sessionTime)
+        public SessionTimer(DysproseSessionLength sessionTime)
         {
             timer = new DispatcherTimer();
             timesTicked = 0;
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 0, 0, 250);
 
-            timesToTick = (int)Math.Ceiling(sessionTime.TotalSeconds / timer.Interval.TotalSeconds);
+            timesToTick = (int)Math.Ceiling(sessionTime.TimeInMilliseconds / timer.Interval.TotalMilliseconds);
         }
 
         private void Timer_Tick(object sender, object e)

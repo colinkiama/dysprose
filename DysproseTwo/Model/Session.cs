@@ -26,7 +26,7 @@ namespace DysproseTwo.Model
 
         public Session()
         {
-            Settings = new DysproseSessionSettings { SessionLength = new TimeSpan(0, 1, 0), FadeInterval = 5 };
+            Settings = new DysproseSessionSettings { SessionLength = new DysproseSessionLength { Length = 1, UnitOfLength = TimeUnit.Seconds } , FadeInterval = 5 };
             State = DysproseSessionState.Stopped;
             Timer = new SessionTimer(Settings.SessionLength);
         }
