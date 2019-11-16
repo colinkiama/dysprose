@@ -9,10 +9,10 @@ namespace DysproseTwo.Structs
 {
     public struct DysproseSessionSettings : IEquatable<DysproseSessionSettings>
     {
-        private TimeSpan _sessionLength;
+        private DysproseSessionLength _sessionLength;
         private int _fadeInterval;
 
-        public TimeSpan SessionLength { get => _sessionLength; set => _sessionLength = value; }
+        public DysproseSessionLength SessionLength { get => _sessionLength; set => _sessionLength = value; }
         public int FadeInterval { get => _fadeInterval; set => _fadeInterval = value; }
 
 

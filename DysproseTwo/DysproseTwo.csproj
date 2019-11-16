@@ -133,7 +133,7 @@
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Structs\DysproseGlobalSettings.cs" />
     <Compile Include="Structs\DysproseSessionSettings.cs" />
-    <Compile Include="Structs\SessionLength.cs" />
+    <Compile Include="Structs\DysproseSessionLength.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\Notifier.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
