@@ -5,6 +5,7 @@
     xmlns:local="using:DysproseTwo.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -32,18 +33,20 @@
                      Margin="0,20,0,0"/>
                 <ComboBox Header="Font Size:"
                      Margin="0,20,0,0"
-                     IsEditable="True"
-                          ItemsSource="{x:Bind _viewModel.FontList}"/>
+                     ItemsSource="{x:Bind _viewModel.FontList}"
+                          contract7Present:IsEditable="True"
+                          contract7Present:Text="{x:Bind _viewModel.FontSize, Mode=TwoWay}"
+                          />
 
             </StackPanel>
         </ScrollViewer>
         <Button Grid.Row="2" Content="About"
                 HorizontalAlignment="Right"
                Margin="0,0,0,24">
-            
+
         </Button>
-        
-        
+
+
 
     </Grid>
 </Page>

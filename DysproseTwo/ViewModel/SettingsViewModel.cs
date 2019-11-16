@@ -8,6 +8,8 @@ namespace DysproseTwo.ViewModel
 {
     class SettingsViewModel : Notifier
     {
+
+
         private double _fontSize;
 
         public double FontSize
@@ -15,8 +17,11 @@ namespace DysproseTwo.ViewModel
             get { return _fontSize; }
             set
             {
-                _fontSize = value;
-                NotifyPropertyChanged();
+                if (_fontSize != value)
+                {
+                   _fontSize = value;
+                    NotifyPropertyChanged();
+                }
             }
         }
 
