@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DysproseTwo.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,17 @@ namespace DysproseTwo.View
     /// </summary>
     public sealed partial class ShellView : Page
     {
+        bool _isMenuOpen = false;
+
         public ShellView()
         {
             this.InitializeComponent();
+            AnimationHelper.FrameSlideOutAnimationCompleted += AnimationHelper_FrameSlideOutAnimationCompleted;
+        }
+
+        private void AnimationHelper_FrameSlideOutAnimationCompleted(object sender, EventArgs e)
+        {
+            SettingsFrame.Visibility = Visibility.Collapsed;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -35,17 +44,30 @@ namespace DysproseTwo.View
             SettingsFrame.Visibility = Visibility.Collapsed;
         }
 
-        private void MenuButton_Click(object sender, RoutedEventArgs e)
+        private async void MenuButton_Click(object sender, RoutedEventArgs e)
         {
-            switch (SettingsFrame.Visibility)
+            if (_isMenuOpen)
             {
-                case Visibility.Visible:
-                    SettingsFrame.Visibility = Visibility.Collapsed;
-                    break;
-                case Visibility.Collapsed:
-                    SettingsFrame.Visibility = Visibility.Visible;
-                    break;
+                await AnimationHelper.FrameSlideOutAnimation(SettingsFrame);
             }
+            else
+            {
+                await AnimationHelper.FrameSlideInAnimation(SettingsFrame);
+            }
+            _isMenuOpen = !_isMenuOpen;
+            
+            
+            //switch (SettingsFrame.Visibility)
+            //{
+            //    case Visibility.Visible:
+            //        SettingsFrame.Visibility = Visibility.Collapsed;
+            //        break;
+            //    case Visibility.Collapsed:
+            //        SettingsFrame.Visibility = Visibility.Visible;
+            //        break;
+            //}
+
+            
         }
     }
 }

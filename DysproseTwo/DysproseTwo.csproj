@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Enums\DysproseSessionState.cs" />
     <Compile Include="Enums\TimeUnit.cs" />
+    <Compile Include="Helpers\AnimationHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
