@@ -5,6 +5,7 @@
     xmlns:local="using:DysproseTwo.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:contract7NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -34,6 +35,7 @@
                 <ComboBox Header="Font Size:"
                      Margin="0,20,0,0"
                      ItemsSource="{x:Bind _viewModel.FontList}"
+                          contract7NotPresent:SelectedItem="{x:Bind _viewModel.FontSize, Mode=TwoWay}"
                           contract7Present:IsEditable="True"
                           contract7Present:Text="{x:Bind _viewModel.FontSize, Mode=TwoWay}"
                           />
