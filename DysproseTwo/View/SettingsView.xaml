@@ -32,7 +32,8 @@
                           ItemsSource="{x:Bind _viewModel.TimeUnits}"
                           SelectedItem="{x:Bind _viewModel.SelectedTimeUnit, Mode=TwoWay}"/>
                 <TextBox Header="Fade Interval (In seconds):"
-                     Margin="0,20,0,0"/>
+                     Margin="0,20,0,0"
+                         Text="{x:Bind _viewModel.FadeIntervalValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <ComboBox Header="Font Size:"
                      Margin="0,20,0,0"
                      ItemsSource="{x:Bind _viewModel.FontList}"

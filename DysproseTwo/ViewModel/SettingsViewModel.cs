@@ -11,6 +11,23 @@ namespace DysproseTwo.ViewModel
     class SettingsViewModel : Notifier
     {
 
+        private int _fadeIntervalValue;
+
+        public int FadeIntervalValue
+        {
+            get { return _fadeIntervalValue; }
+            set
+            {
+                if (_fadeIntervalValue != value)
+                {
+                    _fadeIntervalValue = value;
+                    NotifyPropertyChanged();
+                }
+                
+            }
+        }
+
+
         private TimeUnit _selectedTimeUnit;
 
         public TimeUnit SelectedTimeUnit
@@ -23,7 +40,6 @@ namespace DysproseTwo.ViewModel
                     _selectedTimeUnit = value;
                     NotifyPropertyChanged();
                 }
-
             }
         }
 
