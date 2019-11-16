@@ -238,9 +238,6 @@
                 <AppBarButton Icon="Stop"
                               Label="Stop"
                               Name="StopAppBarButton"/>
-                <AppBarButton Icon="Refresh"
-                              Label="Restart"
-                              Name="RestartAppBarButton"/>
             </CommandBar>
 
 
