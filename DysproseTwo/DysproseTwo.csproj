@@ -131,6 +131,8 @@
     <Compile Include="Services\FadeTimerService.cs" />
     <Compile Include="Structs\DysproseSessionSettings.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
+    <Compile Include="ViewModel\Notifier.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>

@@ -26,12 +26,14 @@
                        />
                 <TextBox Header="Session Length:" Margin="0,20,0,0"/>
                 <ComboBox x:Name="TimeUnitComboBox"
-                      Margin="0,8,0,0"/>
+                      Margin="0,8,0,0"
+                          />
                 <TextBox Header="Fade Interval (In seconds):"
                      Margin="0,20,0,0"/>
                 <ComboBox Header="Font Size:"
                      Margin="0,20,0,0"
-                     IsEditable="True"/>
+                     IsEditable="True"
+                          ItemsSource="{x:Bind _viewModel.FontList}"/>
 
             </StackPanel>
         </ScrollViewer>
