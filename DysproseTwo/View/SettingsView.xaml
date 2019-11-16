@@ -29,7 +29,8 @@
                 <TextBox Header="Session Length:" Margin="0,20,0,0"/>
                 <ComboBox x:Name="TimeUnitComboBox"
                       Margin="0,8,0,0"
-                          />
+                          ItemsSource="{x:Bind _viewModel.TimeUnits}"
+                          SelectedItem="{x:Bind _viewModel.SelectedTimeUnit, Mode=TwoWay}"/>
                 <TextBox Header="Fade Interval (In seconds):"
                      Margin="0,20,0,0"/>
                 <ComboBox Header="Font Size:"
