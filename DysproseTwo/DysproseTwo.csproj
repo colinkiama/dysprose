@@ -130,7 +130,10 @@
     <Compile Include="Model\SessionTimer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FadeTimerService.cs" />
+    <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Structs\DysproseGlobalSettings.cs" />
     <Compile Include="Structs\DysproseSessionSettings.cs" />
+    <Compile Include="Structs\SessionLength.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="ViewModel\Notifier.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
