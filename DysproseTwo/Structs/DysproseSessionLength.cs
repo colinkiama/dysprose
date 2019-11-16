@@ -48,5 +48,9 @@ namespace DysproseTwo.Structs
             return !(left == right);
         }
 
+        public double GetTimeInMilliseconds()
+        {
+            return _length * (int)_unitOfLength;
+        }
     }
 }

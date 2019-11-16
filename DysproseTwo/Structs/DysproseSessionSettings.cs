@@ -18,13 +18,8 @@ namespace DysproseTwo.Structs
 
         public bool Equals(DysproseSessionSettings other)
         {
-            bool isEqual = false;
-            if (other is DysproseSessionSettings otherSettings)
-            {
-                isEqual = this._sessionLength == otherSettings._sessionLength
-                    && this._fadeInterval == otherSettings._fadeInterval;
-            }
-            return isEqual;
+            return this._sessionLength == other._sessionLength
+                   && this._fadeInterval == other._fadeInterval;
         }
 
         public override int GetHashCode()
@@ -51,7 +46,7 @@ namespace DysproseTwo.Structs
             bool isEqual = false;
             if (obj is DysproseSessionSettings otherSettings)
             {
-                 isEqual = this.Equals(otherSettings);
+                isEqual = this.Equals(otherSettings);
             }
 
             return isEqual;

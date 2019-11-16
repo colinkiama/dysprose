@@ -8,18 +8,27 @@ namespace DysproseTwo.Structs
 {
     public struct DysproseGlobalSettings : IEquatable<DysproseGlobalSettings>
     {
-        private double fontSize;
+        private double _fontSize;
 
-        public double FontSize { get => fontSize; set => fontSize = value; }
+        public double FontSize { get => _fontSize; set => _fontSize = value; }
 
         public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            bool isEqual = false;
+            if (obj is DysproseGlobalSettings otherSettings)
+            {
+                isEqual = this.Equals(otherSettings);
+            }
+
+            return isEqual;
         }
 
         public override int GetHashCode()
         {
-            throw new NotImplementedException();
+            int hash = 13;
+            hash = (hash * 7) + _fontSize.GetHashCode();
+
+            return hash;
         }
 
         public static bool operator ==(DysproseGlobalSettings left, DysproseGlobalSettings right)
@@ -34,7 +43,7 @@ namespace DysproseTwo.Structs
 
         public bool Equals(DysproseGlobalSettings other)
         {
-            throw new NotImplementedException();
+            return this._fontSize == other._fontSize;
         }
     }
 }

@@ -8,8 +8,8 @@ namespace DysproseTwo.Enums
 {
     public enum TimeUnit
     {
-        Seconds,
-        Minutes,
-        Hours
+        Seconds = 60,
+        Minutes = 3600,
+        Hours = 216000
     }
 }
