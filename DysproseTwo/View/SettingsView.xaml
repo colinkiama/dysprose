@@ -11,6 +11,37 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.Resources>
+            <Thickness x:Key="DysproseCornerButtonMargin">0,0,32,32</Thickness>
+            <Thickness x:Key="DysproseCornerButtonDesktopMargin">0,0,40,40</Thickness>
+        </Grid.Resources>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                       <Setter Target="SettingsScrollViewer.Padding" Value="{StaticResource DysproseFullWidthPadding}"/>
+                        <Setter Target="AboutButton.Margin" Value="{StaticResource DysproseCornerButtonMargin}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1008"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="SettingsScrollViewer.Padding" Value="{StaticResource DysproseDesktopFullWidthPadding}"/>
+                        <Setter Target="AboutButton.Margin" Value="{StaticResource DysproseCornerButtonDesktopMargin}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -21,7 +52,7 @@
                    FontSize="24"
                    FontWeight="SemiBold"/>
 
-        <ScrollViewer Grid.Row="1" Margin="0,20,0,0">
+        <ScrollViewer Grid.Row="1" Margin="0,20,0,0" Name="SettingsScrollViewer">
             <StackPanel HorizontalAlignment="Left">
                 <TextBlock Text="Settings" FontWeight="SemiBold"
                        FontSize="20"
@@ -50,7 +81,7 @@
         </ScrollViewer>
         <Button Grid.Row="2" Content="About"
                 HorizontalAlignment="Right"
-               Margin="0,0,0,24">
+                Name="AboutButton">
 
         </Button>
 
