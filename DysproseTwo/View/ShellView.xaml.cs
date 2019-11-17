@@ -1,4 +1,5 @@
 ﻿using DysproseTwo.Helpers;
+using DysproseTwo.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -42,33 +43,21 @@ namespace DysproseTwo.View
             MainFrame.Navigate(typeof(MainView));
             SettingsFrame.Navigate(typeof(SettingsView));
             SettingsFrame.Visibility = Visibility.Collapsed;
-            
         }
 
         private async void MenuButton_Click(object sender, RoutedEventArgs e)
         {
             if (_isMenuOpen)
             {
+                MenuButtonService.Instance.CloseMenu();
                 await AnimationHelper.FrameSlideOutAnimation(SettingsFrame);
+
             }
             else
             {
                 await AnimationHelper.FrameSlideInAnimation(SettingsFrame);
             }
             _isMenuOpen = !_isMenuOpen;
-            
-            
-            //switch (SettingsFrame.Visibility)
-            //{
-            //    case Visibility.Visible:
-            //        SettingsFrame.Visibility = Visibility.Collapsed;
-            //        break;
-            //    case Visibility.Collapsed:
-            //        SettingsFrame.Visibility = Visibility.Visible;
-            //        break;
-            //}
-
-            
         }
     }
 }

@@ -90,9 +90,13 @@ namespace DysproseTwo.ViewModel
 
         public SettingsViewModel()
         {
-
+            MenuButtonService.Instance.MenuClosed += Instance_MenuClosed;
         }
 
+        private void Instance_MenuClosed(object sender, EventArgs e)
+        {
+            SetSettings();
+        }
 
         public void GetSettings()
         {
