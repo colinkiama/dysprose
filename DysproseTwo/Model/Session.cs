@@ -27,6 +27,7 @@ namespace DysproseTwo.Model
         public event EventHandler<int> FadeIntervalUpdated;
         public event EventHandler<TimeSpan> TimerTicked;
         public event EventHandler SessionCompleted;
+        public event EventHandler<DysproseSessionState> StateChanged;
 
         public Session()
         {
@@ -62,6 +63,7 @@ namespace DysproseTwo.Model
             if (hasStarted)
             {
                 State = DysproseSessionState.InProgress;
+                StateChanged?.Invoke(this, State);
             }
             return hasStarted;
         }
@@ -84,12 +86,14 @@ namespace DysproseTwo.Model
         {
             Timer.StopTimer();
             State = DysproseSessionState.Paused;
+            StateChanged?.Invoke(this, State);
         }
 
         public void StopSession()
         {
             Timer.StopTimer();
             State = DysproseSessionState.Stopped;
+            StateChanged?.Invoke(this, State);
         }
 
         public bool ResumeSession()
@@ -98,6 +102,7 @@ namespace DysproseTwo.Model
             if (hasStarted)
             {
                 State = DysproseSessionState.InProgress;
+                StateChanged?.Invoke(this, State);
             }
             return hasStarted;
         }

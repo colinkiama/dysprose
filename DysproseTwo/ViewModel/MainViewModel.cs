@@ -46,6 +46,12 @@ namespace DysproseTwo.ViewModel
 
         private DysproseSessionState _currentSessionState;
 
+        internal async Task StopAsync()
+        {
+            CurrentSession.StopSession();
+            await FadeTimerService.StopAsync();
+        }
+
         public DysproseSessionState CurrentSessionState
         {
             get { return _currentSessionState; }
@@ -86,15 +92,25 @@ namespace DysproseTwo.ViewModel
 
         private void FillInDetailsFromSession()
         {
-            CurrentSession.Timer.TimerTicked += Timer_TimerTicked;
-            CurrentSession.Timer.TimerEnded += Timer_TimerEnded;
+            CurrentSession.TimerTicked += CurrentSession_TimerTicked;
+            CurrentSession.SessionCompleted += CurrentSession_SessionCompleted;
+            CurrentSession.StateChanged += CurrentSession_StateChanged;
+
             _sessionLength = TimeSpan.FromMilliseconds(CurrentSession.Settings.SessionLength.TimeInMilliseconds);
             CurrentSessionTime = _sessionLength;
             SettingsService.Instance.GlobalSettingsUpdated += Instance_GlobalSettingsUpdated;
             SettingsService.Instance.SessionSettingsUpdated += Instance_SessionSettingsUpdated;
         }
 
+        private void CurrentSession_SessionCompleted(object sender, EventArgs e)
+        {
+            CurrentSessionTime = new TimeSpan(0);
+        }
 
+        private void CurrentSession_StateChanged(object sender, DysproseSessionState newState)
+        {
+            CurrentSessionState = newState;
+        }
 
         private void Instance_SessionSettingsUpdated(object sender, Structs.DysproseSessionSettings e)
         {
@@ -137,12 +153,9 @@ namespace DysproseTwo.ViewModel
         {
             FadeTimerService = new FadeTimerService(elementToFade, CurrentSession.Settings.FadeInterval);
         }
-        private void Timer_TimerEnded(object sender, EventArgs e)
-        {
-            CurrentSessionTime = new TimeSpan(0);
-        }
+       
 
-        private void Timer_TimerTicked(object sender, TimeSpan timeElapsed)
+        private void CurrentSession_TimerTicked(object sender, TimeSpan timeElapsed)
         {
             CurrentSessionTime = _sessionLength - timeElapsed;
         }

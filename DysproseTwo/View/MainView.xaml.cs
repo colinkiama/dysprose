@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -29,14 +30,52 @@ namespace DysproseTwo.View
             this.InitializeComponent();
         }
 
-        private void StopAppBarButton_Click(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            base.OnNavigatedTo(e);
+            _viewModel.ObtainFadeElement(FadeTextBox);
+            _viewModel.FadeTimerService.FadeCompleted += FadeTimerService_FadeCompleted;
         }
 
-        private void PausePlayAppBarButton_Click(object sender, RoutedEventArgs e)
+        private void FadeTimerService_FadeCompleted(object sender, Microsoft.Toolkit.Uwp.UI.Animations.AnimationSetCompletedEventArgs e)
         {
+            FadeTextBox.Text = "";
+        }
 
+        private async void StopAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            await _viewModel.StopAsync();
+        }
+
+        private async void PausePlayAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (_viewModel.CurrentSessionState)
+            {
+                case Enums.DysproseSessionState.InProgress:
+                    await _viewModel.PauseAsync();
+                    break;
+                case Enums.DysproseSessionState.Paused:
+                    await _viewModel.ResumeAsync();
+                    break;
+                case Enums.DysproseSessionState.Stopped:
+                    await _viewModel.StartAsync();
+                    break;
+            }
+        }
+
+        private async void FadeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_viewModel.CurrentSessionState == Enums.DysproseSessionState.InProgress)
+            {
+                if (FadeTextBox.Text.Length > 0)
+                {
+                    await _viewModel.FadeTimerService.StartAsync();
+                }
+                else
+                {
+                    await _viewModel.FadeTimerService.StopAsync();
+                } 
+            }
         }
     }
 }

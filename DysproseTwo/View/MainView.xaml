@@ -261,6 +261,7 @@
         
         
         <TextBox Background="Transparent"
+                 Name="FadeTextBox"
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
                  BorderThickness="0"
@@ -269,7 +270,8 @@
                  VerticalAlignment="Stretch"
                  PlaceholderText="Start writing here..."
                  Margin="0,20,0,0"
-                 FontSize="{x:Bind _viewModel.FontSize, Mode=OneWay}"></TextBox>
+                 FontSize="{x:Bind _viewModel.FontSize, Mode=OneWay}"
+                 TextChanged="FadeTextBox_TextChanged"></TextBox>
 
         <TextBlock Grid.Row="2"
                    Name="WordCountTextBlock"
