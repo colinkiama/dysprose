@@ -16,7 +16,8 @@
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-          Name="RootGrid">
+          Name="RootGrid"
+          Padding="0,0,0,12">
         <Grid.Resources>
             <Style TargetType="TextBox">
                 <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}" />
@@ -236,6 +237,8 @@
 
                     <VisualState.Setters>
                         <Setter Target="TopRelativePanel.Margin" Value="{StaticResource DysproseFullWidthPadding}"/>
+                        <Setter Target="WordCountTextBlock.Margin" Value="{StaticResource DysproseLeftMargin}"/>
+                        <Setter Target="TextBoxScrollViewer.Padding" Value="{StaticResource DysproseFullWidthPadding}"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -246,6 +249,8 @@
 
                     <VisualState.Setters>
                         <Setter Target="TopRelativePanel.Margin" Value="{StaticResource DysproseDesktopFullWidthPadding}"/>
+                        <Setter Target="TextBoxScrollViewer.Padding" Value="{StaticResource DysproseDesktopFullWidthPadding}"/>
+                        <Setter Target="WordCountTextBlock.Margin" Value="{StaticResource DysproseDesktopLeftMargin}"/>
                     </VisualState.Setters>
                 </VisualState>
 
@@ -279,24 +284,25 @@
 
 
 
-      
+
+        <ScrollViewer Grid.Row="1"
+                      Margin="0,20,0,0"
+                      Name="TextBoxScrollViewer">
             <TextBox Background="Transparent"
                  Name="FadeTextBox"
-                 Margin="0,20,0,0"
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
                  BorderThickness="0"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Stretch"
                  PlaceholderText="Start writing here..."
-                 Grid.Row="1"
                  FontSize="{x:Bind _viewModel.FontSize, Mode=OneWay}"
                  TextChanged="FadeTextBox_TextChanged"
-                 IsEnabled="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToBooleanConverter}}"
-                 ScrollViewer.VerticalScrollBarVisibility="Visible">
-                
+                 IsEnabled="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToBooleanConverter}}">
+
             </TextBox>
-        
+        </ScrollViewer>
+
 
         <TextBlock Grid.Row="2"
                    Name="WordCountTextBlock"
