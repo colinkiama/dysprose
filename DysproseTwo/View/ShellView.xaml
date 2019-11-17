@@ -29,8 +29,8 @@
                     </VisualState.StateTriggers>
 
                     <VisualState.Setters>
-                        <Setter Target="RootGrid.Padding" Value="{StaticResource DysproseDesktopLeftMargin}"/>
-                        <Setter Target="MenuButton.Margin" Value="40,0,0,0"/>
+                        <Setter Target="RootGrid.Padding" Value="{StaticResource DysproseDesktopPagePadding}"/>
+                        <Setter Target="MenuButton.Margin" Value="{StaticResource DysproseDesktopLeftMargin}"/>
                     </VisualState.Setters>
                 </VisualState>
 
