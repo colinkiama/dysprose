@@ -1,13 +1,15 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Thickness x:Key="DysprosePagePadding">32,32,32,0</Thickness>
-    <Thickness x:Key="DysproseDesktopPagePadding">40,40,40,0</Thickness>
-    <Style x:Key="DysproseRootGridStyle" TargetType="Grid">
-        <Setter Property="Padding" Value="{StaticResource DysprosePagePadding}"/>
-    </Style>
+    <Thickness x:Key="DysprosePagePadding">0,32,0,0</Thickness>
+    <Thickness x:Key="DysproseDesktopPagePadding">0,40,0,0</Thickness>
+    
+    <Thickness x:Key="DysproseLeftMargin">32,0,0,0</Thickness>
+    <Thickness x:Key="DysproseDesktopLeftMargin">40,0,0,0</Thickness>
+    
+    <Thickness x:Key="DysproseFullWidthPadding">32,0,32,0</Thickness>
+    <Thickness x:Key="DysproseDesktopFullWidthPadding">40,0,40,0</Thickness>
 
-    <Style x:Key="DysproseDesktopRootGridStyle" TargetType="Grid">
-        <Setter Property="Padding" Value="{StaticResource DysproseDesktopPagePadding}"/>
-    </Style>
+
+
 </ResourceDictionary>

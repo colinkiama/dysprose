@@ -225,7 +225,34 @@
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <RelativePanel>
+
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="TopRelativePanel.Margin" Value="{StaticResource DysproseFullWidthPadding}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState x:Name="Desktop">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1008"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="TopRelativePanel.Margin" Value="{StaticResource DysproseDesktopFullWidthPadding}"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <RelativePanel Name="TopRelativePanel">
             
 
             <CommandBar RelativePanel.AlignHorizontalCenterWithPanel="True"
@@ -249,22 +276,27 @@
                      Height="32"
                      RelativePanel.AlignRightWithPanel="True"/>
         </RelativePanel>
-        
-        
-        
-        <TextBox Background="Transparent"
+
+
+
+      
+            <TextBox Background="Transparent"
                  Name="FadeTextBox"
+                 Margin="0,20,0,0"
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
                  BorderThickness="0"
-                 Grid.Row="1"
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Stretch"
                  PlaceholderText="Start writing here..."
-                 Margin="0,20,0,0"
+                 Grid.Row="1"
                  FontSize="{x:Bind _viewModel.FontSize, Mode=OneWay}"
                  TextChanged="FadeTextBox_TextChanged"
-                 IsEnabled="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToBooleanConverter}}"></TextBox>
+                 IsEnabled="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToBooleanConverter}}"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible">
+                
+            </TextBox>
+        
 
         <TextBlock Grid.Row="2"
                    Name="WordCountTextBlock"
