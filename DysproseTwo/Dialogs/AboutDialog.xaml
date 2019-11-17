@@ -28,6 +28,6 @@
         </StackPanel>
         <TextBlock Grid.Row="1" Text="Colin Kiama - 2019" FontWeight="SemiBold"
                    VerticalAlignment="Bottom"
-                   Margin="0,32,0,0"/>
+                   Margin="0,12,0,0"/>
     </Grid>
 </ContentDialog>
