@@ -47,12 +47,6 @@ namespace DysproseTwo.ViewModel
 
         private DysproseSessionState _currentSessionState;
 
-        internal async Task StopAsync()
-        {
-            CurrentSession.StopSession();
-            await FadeTimerService.StopAsync();
-        }
-
         public DysproseSessionState CurrentSessionState
         {
             get { return _currentSessionState; }
@@ -96,7 +90,18 @@ namespace DysproseTwo.ViewModel
             }
         }
 
-      
+        private double _sessionInverseProgress;
+
+        public double SessionInverseProgress
+        {
+            get { return _sessionInverseProgress; }
+            set
+            {
+                _sessionInverseProgress = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         public MainViewModel()
         {
@@ -106,6 +111,12 @@ namespace DysproseTwo.ViewModel
             FadeTimerService = new FadeTimerService();
             FadeTimerService.FadeCompleted += FadeTimerService_FadeCompleted;
             SessionText = "";
+            ResetSessionInverseProgress();
+        }
+
+        private void ResetSessionInverseProgress()
+        {
+            SessionInverseProgress = 100;
         }
 
         private void FadeTimerService_FadeCompleted(object sender, Microsoft.Toolkit.Uwp.UI.Animations.AnimationSetCompletedEventArgs e)
@@ -113,7 +124,7 @@ namespace DysproseTwo.ViewModel
             SessionText = "";
         }
 
-        
+
 
         private void FillInDetailsFromSession()
         {
@@ -178,6 +189,13 @@ namespace DysproseTwo.ViewModel
             await FadeTimerService.StopAsync().ConfigureAwait(true);
         }
 
+        internal async Task StopAsync()
+        {
+            CurrentSession.StopSession();
+            ResetSessionInverseProgress();
+            await FadeTimerService.StopAsync();
+        }
+
         internal async Task ResetFadeAsync()
         {
             await FadeTimerService.StartAsync().ConfigureAwait(true);
@@ -186,6 +204,7 @@ namespace DysproseTwo.ViewModel
         private void CurrentSession_TimerTicked(object sender, TimeSpan timeElapsed)
         {
             CurrentSessionTime = _sessionLength - timeElapsed;
+            SessionInverseProgress = CurrentSessionTime.TotalMilliseconds / _sessionLength.TotalMilliseconds;
         }
     }
 }
