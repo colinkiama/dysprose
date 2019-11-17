@@ -151,7 +151,6 @@ namespace DysproseTwo.ViewModel
 
             _sessionLength = TimeSpan.FromMilliseconds(CurrentSession.Settings.SessionLength.TimeInMilliseconds);
             CurrentSessionTime = _sessionLength;
-
         }
 
         private async void CurrentSession_SessionCompleted(object sender, EventArgs e)
@@ -210,6 +209,7 @@ namespace DysproseTwo.ViewModel
         internal async Task StopAsync()
         {
             CurrentSession.StopSession();
+            SessionText = "";
             ResetSessionInverseProgress();
             await FadeTimerService.StopAsync();
         }
