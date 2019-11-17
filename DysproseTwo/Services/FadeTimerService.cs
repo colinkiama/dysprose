@@ -19,8 +19,7 @@ namespace DysproseTwo.Services
 
         FrameworkElement _controlToFade;
 
-
-        public FadeTimerService(FrameworkElement controlToFade, int secondsBeforeFading)
+        public void SetControlToFade(FrameworkElement controlToFade, int secondsBeforeFading)
         {
             _controlToFade = controlToFade;
             _fadeAnimationTime = secondsBeforeFading * MillisecondsInSeconds;

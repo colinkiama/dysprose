@@ -33,7 +33,6 @@ namespace DysproseTwo.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            _viewModel.ObtainFadeElement(FadeTextBox);
             _viewModel.FadeTimerService.FadeCompleted += FadeTimerService_FadeCompleted;
         }
 
@@ -58,7 +57,7 @@ namespace DysproseTwo.View
                     await _viewModel.ResumeAsync();
                     break;
                 case Enums.DysproseSessionState.Stopped:
-                    await _viewModel.StartAsync();
+                    await _viewModel.StartAsync(FadeTextBox);
                     break;
             }
         }

@@ -82,12 +82,10 @@ namespace DysproseTwo.ViewModel
 
         public MainViewModel()
         {
-            CurrentSession = new Session();
-            FillInDetailsFromSession();
+            SettingsService.Instance.GlobalSettingsUpdated += Instance_GlobalSettingsUpdated;
             FontSize = SettingsService.Instance.GlobalSettings.FontSize;
-
-            // Just for testing
             CurrentSessionState = DysproseSessionState.Stopped;
+            FadeTimerService = new FadeTimerService();
         }
 
         private void FillInDetailsFromSession()
@@ -98,8 +96,7 @@ namespace DysproseTwo.ViewModel
 
             _sessionLength = TimeSpan.FromMilliseconds(CurrentSession.Settings.SessionLength.TimeInMilliseconds);
             CurrentSessionTime = _sessionLength;
-            SettingsService.Instance.GlobalSettingsUpdated += Instance_GlobalSettingsUpdated;
-            SettingsService.Instance.SessionSettingsUpdated += Instance_SessionSettingsUpdated;
+            
         }
 
         private void CurrentSession_SessionCompleted(object sender, EventArgs e)
@@ -112,11 +109,6 @@ namespace DysproseTwo.ViewModel
             CurrentSessionState = newState;
         }
 
-        private void Instance_SessionSettingsUpdated(object sender, Structs.DysproseSessionSettings e)
-        {
-            CurrentSession = new Session(e);
-            FillInDetailsFromSession();
-        }
 
         private void Instance_GlobalSettingsUpdated(object sender, Structs.DysproseGlobalSettings globalSettings)
         {
@@ -129,11 +121,15 @@ namespace DysproseTwo.ViewModel
             await FadeTimerService.StartAsync().ConfigureAwait(true);
         }
 
-        internal async Task StartAsync()
+        internal async Task StartAsync(FrameworkElement controlToFade)
         {
+            CurrentSession = new Session();
+            FillInDetailsFromSession();
+
             bool hasSessionStarted = CurrentSession.StartSession();
             if (hasSessionStarted)
             {
+                _fadeTimerService.SetControlToFade(controlToFade, CurrentSession.Settings.FadeInterval);
                 await FadeTimerService.StartAsync().ConfigureAwait(true);
             }
         }
@@ -149,21 +145,9 @@ namespace DysproseTwo.ViewModel
             await FadeTimerService.StartAsync().ConfigureAwait(true);
         }
 
-        public void ObtainFadeElement(FrameworkElement elementToFade)
-        {
-            FadeTimerService = new FadeTimerService(elementToFade, CurrentSession.Settings.FadeInterval);
-        }
-       
-
         private void CurrentSession_TimerTicked(object sender, TimeSpan timeElapsed)
         {
             CurrentSessionTime = _sessionLength - timeElapsed;
         }
-
-        public void UpdateFadeTime(int updatedFadeInterval)
-        {
-            FadeTimerService.UpdateFadeInterval(updatedFadeInterval);
-        }
-
     }
 }
