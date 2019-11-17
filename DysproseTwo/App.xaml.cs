@@ -36,6 +36,14 @@ namespace DysproseTwo
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.EnteredBackground += App_EnteredBackground;
+        }
+
+        private async void App_EnteredBackground(object sender, EnteredBackgroundEventArgs e)
+        {
+            var deferral = e.GetDeferral();
+            await SettingsService.Instance.SaveSettingsAsync();
+            deferral.Complete();
         }
 
         /// <summary>

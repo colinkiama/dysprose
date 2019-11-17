@@ -48,23 +48,44 @@ namespace DysproseTwo.Services
 
         public async Task LoadSettingsAsync()
         {
-            // TODO: Load from file
-            SessionSettings = new DysproseSessionSettings
+            var globalSettingsLoad = await FileIOService.Instance.LoadGlobalSettings();
+            if (globalSettingsLoad != null)
             {
-                FadeInterval = 5,
-                SessionLength = new DysproseSessionLength
-                {
-                    Length = 1,
-                    UnitOfLength = Enums.TimeUnit.Minutes
-                }
-            };
+                GlobalSettings = (DysproseGlobalSettings)globalSettingsLoad;
+            }
+            else
+            {
+                GlobalSettings = new DysproseGlobalSettings { FontSize = 15 };
+            }
 
-            GlobalSettings = new DysproseGlobalSettings { FontSize = 15 };
+            
+            
+            var sessionSettingsLoad = await FileIOService.Instance.LoadSessionSettings();
+            if (sessionSettingsLoad != null)
+            {
+                SessionSettings = (DysproseSessionSettings)sessionSettingsLoad;
+            }
+            else
+            {
+                // TODO: Load from file
+                SessionSettings = new DysproseSessionSettings
+                {
+                    FadeInterval = 5,
+                    SessionLength = new DysproseSessionLength
+                    {
+                        Length = 1,
+                        UnitOfLength = Enums.TimeUnit.Minutes
+                    }
+                };
+
+            }
+
         }
 
         public async Task SaveSettingsAsync()
         {
-            // TODO: Save to file
+            await FileIOService.Instance.SaveGlobalSettingsAsync(_globalSettings);
+            await FileIOService.Instance.SaveSessionSettingsAsync(_sessionSettings);
         }
 
     }
