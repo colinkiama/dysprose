@@ -1,0 +1,33 @@
+﻿<ContentDialog
+    x:Class="DysproseTwo.Dialogs.AboutDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DysproseTwo.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="TITLE"
+    CloseButtonText="Close">
+    <ContentDialog.Resources>
+        <x:String x:Key="FeedbackString">mailto:colinkiama@gmail.com?subject=Dysprose%20Feedback&amp;body=[Write Feedback Here]</x:String>
+        <x:String x:Key="WebsiteString">https://www.colinkiama.com</x:String>
+        <x:String x:Key="GitHubString">https://www.github.com/colinkiama</x:String>
+    </ContentDialog.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock x:Name="VersionTextBlock"/>
+            <HyperlinkButton Name="FeedbackLink" NavigateUri="{StaticResource FeedbackString}" Content="Feedback"
+                             Margin="0,8,0,0"/>
+            <HyperlinkButton Name="WebsiteLink" NavigateUri="{StaticResource WebsiteString}" Content="Website"/>
+            <HyperlinkButton Name="GitHubLink" NavigateUri="{StaticResource GitHubString}" Content="GitHub"/>
+        </StackPanel>
+        <TextBlock Grid.Row="1" Text="Colin Kiama - 2019" FontWeight="SemiBold"
+                   VerticalAlignment="Bottom"
+                   Margin="0,32,0,0"/>
+    </Grid>
+</ContentDialog>

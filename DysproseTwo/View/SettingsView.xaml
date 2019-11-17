@@ -81,7 +81,8 @@
         </ScrollViewer>
         <Button Grid.Row="2" Content="About"
                 HorizontalAlignment="Right"
-                Name="AboutButton">
+                Name="AboutButton"
+                Click="AboutButton_Click">
 
         </Button>
 

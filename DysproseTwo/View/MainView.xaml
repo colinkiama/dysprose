@@ -323,9 +323,7 @@
                  FontSize="{x:Bind _viewModel.FontSize, Mode=OneWay}"
                  IsEnabled="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToBooleanConverter}}"
                      Text="{x:Bind _viewModel.SessionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     TextChanged="FadeTextBox_TextChanged">
-
-            </TextBox>
+                     TextChanged="FadeTextBox_TextChanged"/>
         </ScrollViewer>
 
 

@@ -1,4 +1,5 @@
-﻿using DysproseTwo.ViewModel;
+﻿using DysproseTwo.Dialogs;
+using DysproseTwo.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +25,7 @@ namespace DysproseTwo.View
     public sealed partial class SettingsView : Page
     {
         SettingsViewModel _viewModel = new SettingsViewModel();
+        AboutDialog _aboutDialog = new AboutDialog();
         public SettingsView()
         {
             this.InitializeComponent();
@@ -33,6 +35,18 @@ namespace DysproseTwo.View
         {
             base.OnNavigatedTo(e);
             _viewModel.GetSettings();
+        }
+
+        private async void AboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await _aboutDialog.ShowAsync();
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

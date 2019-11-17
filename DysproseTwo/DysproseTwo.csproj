@@ -135,6 +135,9 @@
     <Compile Include="Converters\SessionStateToPlayPauseLabel.cs" />
     <Compile Include="Converters\SessionStateToShareVisibility.cs" />
     <Compile Include="Converters\SessionStateToVisibility.cs" />
+    <Compile Include="Dialogs\AboutDialog.xaml.cs">
+      <DependentUpon>AboutDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\SessionCompletedDialog.xaml.cs">
       <DependentUpon>SessionCompletedDialog.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialogs\AboutDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\SessionCompletedDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
