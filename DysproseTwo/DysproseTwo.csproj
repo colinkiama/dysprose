@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\SessionStateToPausePlayIcon.cs" />
+    <Compile Include="Converters\SessionStateToPlayPauseLabel.cs" />
     <Compile Include="Converters\SessionStateToVisibility.cs" />
     <Compile Include="Enums\DysproseSessionState.cs" />
     <Compile Include="Enums\TimeUnit.cs" />

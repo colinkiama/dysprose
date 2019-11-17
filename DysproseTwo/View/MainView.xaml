@@ -11,6 +11,7 @@
     <Page.Resources>
         <converters:SessionStateToPausePlayIcon x:Key="StateToIconConverter"/>
         <converters:SessionStateToVisibility x:Key="StateToVisibilityConverter"/>
+        <converters:SessionStateToPlayPauseLabel x:Key="StateToPausePlayLabelConverter"/>
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -239,7 +240,7 @@
                         Background="Transparent">
               
                 <AppBarButton Icon="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToIconConverter}}"
-                              Label="Pause"
+                              Label="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToPausePlayLabelConverter}}"
                               Name="PausePlayAppBarButton"
                               Click="PausePlayAppBarButton_Click"
                               />
