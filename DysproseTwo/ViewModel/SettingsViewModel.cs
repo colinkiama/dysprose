@@ -77,6 +77,23 @@ namespace DysproseTwo.ViewModel
             }
         }
 
+
+        
+        // Beware of double negative!
+        // This was done for easier xaml binding
+        private bool _isSessionNotInProgress;
+
+        public bool IsSessionNotInProgress
+        {
+            get { return _isSessionNotInProgress; }
+            set
+            {
+                _isSessionNotInProgress = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public List<double> FontList { get; set; } = new List<double>()
         {
             8,9,10,11,12,14,15,18,24,30,36,48,60,72,96
@@ -91,6 +108,22 @@ namespace DysproseTwo.ViewModel
         public SettingsViewModel()
         {
             MenuButtonService.Instance.MenuClosed += Instance_MenuClosed;
+            SessionService.Instance.SessionStateChanged += Instance_SessionStateChanged;
+            IsSessionNotInProgress = true;
+        }
+
+        private void Instance_SessionStateChanged(object sender, DysproseSessionState sessionState)
+        {
+            switch (sessionState)
+            {
+                
+                case DysproseSessionState.Stopped:
+                    IsSessionNotInProgress = false;
+                    break;
+                default:
+                    IsSessionNotInProgress = true;
+                    break;
+            }
         }
 
         private void Instance_MenuClosed(object sender, EventArgs e)
@@ -109,11 +142,14 @@ namespace DysproseTwo.ViewModel
 
         public void SetSettings()
         {
-            var sessionSettings = GetSessionSettingsFromViewModel();
             var globalSettings = GetGlobalSettingsFromViewModel();
-
-            SettingsService.Instance.UpdateSessionSettings(sessionSettings);
             SettingsService.Instance.UpdateGlobalSettings(globalSettings);
+
+            if (_isSessionNotInProgress == false)
+            {
+                var sessionSettings = GetSessionSettingsFromViewModel();
+                SettingsService.Instance.UpdateSessionSettings(sessionSettings); 
+            }
         }
 
         private DysproseGlobalSettings GetGlobalSettingsFromViewModel() => new DysproseGlobalSettings { FontSize = this.FontSize };
