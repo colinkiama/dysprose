@@ -46,6 +46,26 @@ namespace DysproseTwo.Services
             }
         }
 
+        public async Task LoadSettingsAsync()
+        {
+            // TODO: Load from file
+            SessionSettings = new DysproseSessionSettings
+            {
+                FadeInterval = 5,
+                SessionLength = new DysproseSessionLength
+                {
+                    Length = 1,
+                    UnitOfLength = Enums.TimeUnit.Minutes
+                }
+            };
+
+            GlobalSettings = new DysproseGlobalSettings { FontSize = 15 };
+        }
+
+        public async Task SaveSettingsAsync()
+        {
+            // TODO: Save to file
+        }
 
     }
 }

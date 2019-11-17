@@ -48,7 +48,7 @@ namespace DysproseTwo.ViewModel
         public MainPageViewModel()
         {
             CurrentSession = new Session();
-            _sessionLength = CurrentSession.Settings.SessionLength;
+            _sessionLength = TimeSpan.FromMilliseconds(CurrentSession.Settings.SessionLength.TimeInMilliseconds);
             CurrentSessionTime = _sessionLength;
             CurrentSession.Timer.TimerTicked += Timer_TimerTicked;
             CurrentSession.Timer.TimerEnded += Timer_TimerEnded;

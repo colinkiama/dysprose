@@ -42,6 +42,7 @@ namespace DysproseTwo.View
             MainFrame.Navigate(typeof(MainView));
             SettingsFrame.Navigate(typeof(SettingsView));
             SettingsFrame.Visibility = Visibility.Collapsed;
+            
         }
 
         private async void MenuButton_Click(object sender, RoutedEventArgs e)

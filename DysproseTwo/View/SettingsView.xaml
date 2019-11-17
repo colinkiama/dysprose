@@ -26,7 +26,8 @@
                 <TextBlock Text="Settings" FontWeight="SemiBold"
                        FontSize="20"
                        />
-                <TextBox Header="Session Length:" Margin="0,20,0,0"/>
+                <TextBox Header="Session Length:" Margin="0,20,0,0"
+                         Text="{x:Bind _viewModel.SessionLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <ComboBox x:Name="TimeUnitComboBox"
                       Margin="0,8,0,0"
                           ItemsSource="{x:Bind _viewModel.TimeUnits}"
@@ -39,7 +40,7 @@
                      ItemsSource="{x:Bind _viewModel.FontList}"
                           contract7NotPresent:SelectedItem="{x:Bind _viewModel.FontSize, Mode=TwoWay}"
                           contract7Present:IsEditable="True"
-                          contract7Present:Text="{x:Bind _viewModel.FontSize, Mode=TwoWay}"
+                          contract7Present:Text="{x:Bind _viewModel.FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           />
 
             </StackPanel>
