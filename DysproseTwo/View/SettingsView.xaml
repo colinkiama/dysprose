@@ -10,7 +10,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.Resources>
             <Thickness x:Key="DysproseCornerButtonMargin">0,0,32,32</Thickness>
             <Thickness x:Key="DysproseCornerButtonDesktopMargin">0,0,40,40</Thickness>
