@@ -15,6 +15,7 @@
         <converters:SessionStateToPlayPauseLabel x:Key="StateToPausePlayLabelConverter"/>
         <converters:SessionStateToBool x:Key="StateToBooleanConverter"/>
         <converters:SessionStateToShareVisibility x:Key="StateToShareVisibilityConverter"/>
+        <converters:IntToWordCount x:Key="IntegerToWordCountConverter"/>
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -330,7 +331,7 @@
 
         <TextBlock Grid.Row="2"
                    Name="WordCountTextBlock"
-                   Text="2 Words"
+                   Text="{x:Bind _viewModel.WordCount, Mode=OneWay, Converter={StaticResource IntegerToWordCountConverter}}"
                    Margin="0,8"/>
     </Grid> 
 

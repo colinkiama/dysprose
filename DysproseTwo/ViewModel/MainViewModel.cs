@@ -1,5 +1,6 @@
 ﻿using DysproseTwo.Dialogs;
 using DysproseTwo.Enums;
+using DysproseTwo.Helpers;
 using DysproseTwo.Model;
 using DysproseTwo.Services;
 using System;
@@ -85,9 +86,15 @@ namespace DysproseTwo.ViewModel
                 {
                     _sessionText = value;
                     NotifyPropertyChanged();
+                    UpdateWordCount();
 
                 }
             }
+        }
+
+        private void UpdateWordCount()
+        {
+            WordCount = WordCountHelper.CalculateWordCount(_sessionText);
         }
 
         private double _sessionInverseProgress;
@@ -98,6 +105,18 @@ namespace DysproseTwo.ViewModel
             set
             {
                 _sessionInverseProgress = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private int _wordCount;
+
+        public int WordCount
+        {
+            get { return _wordCount; }
+            set
+            {
+                _wordCount = value;
                 NotifyPropertyChanged();
             }
         }
@@ -123,8 +142,6 @@ namespace DysproseTwo.ViewModel
         {
             SessionText = "";
         }
-
-
 
         private void FillInDetailsFromSession()
         {
@@ -172,6 +189,7 @@ namespace DysproseTwo.ViewModel
 
         internal async Task StartAsync(FrameworkElement controlToFade)
         {
+            SessionText = "";
             CurrentSession = new Session();
             FillInDetailsFromSession();
 
