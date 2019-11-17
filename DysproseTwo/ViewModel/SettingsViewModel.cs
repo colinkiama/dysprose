@@ -118,10 +118,10 @@ namespace DysproseTwo.ViewModel
             {
                 
                 case DysproseSessionState.Stopped:
-                    IsSessionNotInProgress = false;
+                    IsSessionNotInProgress = true;
                     break;
                 default:
-                    IsSessionNotInProgress = true;
+                    IsSessionNotInProgress = false;
                     break;
             }
         }
