@@ -270,13 +270,19 @@
                         Background="Transparent"
                         Name="SessionCommandBar">
 
-                <AppBarButton Icon="Share"
-                              Label="Share"
+                <AppBarButton Label="Share"
                               Name="ShareAppBarButton"
                               Visibility="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToShareVisibilityConverter}}">
+                    <AppBarButton.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
+                    </AppBarButton.Icon>
                     <AppBarButton.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem Icon="Share" Text="Share UI" Click="FlyoutShareClick"/>
+                            <MenuFlyoutItem Text="Share UI" Click="FlyoutShareClick">
+                                <MenuFlyoutItem.Icon>
+                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
+                                </MenuFlyoutItem.Icon>
+                            </MenuFlyoutItem>
                             <MenuFlyoutItem Icon="Copy" Text="Copy Text" Click="FlyoutCopyClick"/>
                         </MenuFlyout>
                     </AppBarButton.Flyout>
