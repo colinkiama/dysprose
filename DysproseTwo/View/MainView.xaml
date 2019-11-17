@@ -12,6 +12,7 @@
         <converters:SessionStateToPausePlayIcon x:Key="StateToIconConverter"/>
         <converters:SessionStateToVisibility x:Key="StateToVisibilityConverter"/>
         <converters:SessionStateToPlayPauseLabel x:Key="StateToPausePlayLabelConverter"/>
+        <converters:SessionStateToBool x:Key="StateToBooleanConverter"/>
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -263,7 +264,7 @@
                  Margin="0,20,0,0"
                  FontSize="{x:Bind _viewModel.FontSize, Mode=OneWay}"
                  TextChanged="FadeTextBox_TextChanged"
-                 IsEnabled="True"></TextBox>
+                 IsEnabled="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToBooleanConverter}}"></TextBox>
 
         <TextBlock Grid.Row="2"
                    Name="WordCountTextBlock"
