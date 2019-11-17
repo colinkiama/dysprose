@@ -145,7 +145,7 @@ namespace DysproseTwo.ViewModel
             var globalSettings = GetGlobalSettingsFromViewModel();
             SettingsService.Instance.UpdateGlobalSettings(globalSettings);
 
-            if (_isSessionNotInProgress == false)
+            if (_isSessionNotInProgress)
             {
                 var sessionSettings = GetSessionSettingsFromViewModel();
                 SettingsService.Instance.UpdateSessionSettings(sessionSettings); 
@@ -157,7 +157,7 @@ namespace DysproseTwo.ViewModel
         private DysproseSessionSettings GetSessionSettingsFromViewModel() => new DysproseSessionSettings
         {
             FadeInterval = FadeIntervalValue,
-            SessionLength = new DysproseSessionLength { Length = SessionLength, UnitOfLength = SelectedTimeUnit }
+            SessionLength = new DysproseSessionLength { Length = _sessionLength, UnitOfLength = _selectedTimeUnit }
         };
 
 

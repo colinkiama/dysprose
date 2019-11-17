@@ -1,6 +1,7 @@
 ﻿using DysproseTwo.Structs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace DysproseTwo.Model
         private void Timer_Tick(object sender, object e)
         {
             timesTicked++;
+            Debug.WriteLine($"Times ticked: {timesTicked}/{timesToTick}");
             if (timesTicked > timesToTick)
             {
                 timer.Stop();

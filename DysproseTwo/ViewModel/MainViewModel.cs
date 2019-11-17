@@ -99,9 +99,10 @@ namespace DysproseTwo.ViewModel
             
         }
 
-        private void CurrentSession_SessionCompleted(object sender, EventArgs e)
+        private async void CurrentSession_SessionCompleted(object sender, EventArgs e)
         {
             CurrentSessionTime = new TimeSpan(0);
+            await FadeTimerService.StopAsync();
         }
 
         private void CurrentSession_StateChanged(object sender, DysproseSessionState newState)

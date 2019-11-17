@@ -41,6 +41,7 @@ namespace DysproseTwo.Model
 
         private void Timer_TimerEnded(object sender, EventArgs e)
         {
+            StopSession();
             SessionCompleted?.Invoke(sender, e);
         }
 
@@ -58,7 +59,6 @@ namespace DysproseTwo.Model
 
         public bool StartSession()
         {
-            Timer = new SessionTimer(settings.SessionLength);
             bool hasStarted = Timer.StartTimer();
             if (hasStarted)
             {
