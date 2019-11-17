@@ -6,8 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:converters="using:DysproseTwo.Converters">
+    <Page.Resources>
+        <converters:SessionStateToPausePlayIcon x:Key="StateToIconConverter"/>
+        <converters:SessionStateToVisibility x:Key="StateToVisibilityConverter"/>
+    </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
           Name="RootGrid">
@@ -229,15 +233,21 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <RelativePanel>
+            
 
             <CommandBar RelativePanel.AlignHorizontalCenterWithPanel="True"
                         Background="Transparent">
-                <AppBarButton Icon="Pause"
+              
+                <AppBarButton Icon="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToIconConverter}}"
                               Label="Pause"
-                              Name="PausePlayAppBarButton"/>
+                              Name="PausePlayAppBarButton"
+                              Click="PausePlayAppBarButton_Click"
+                              />
                 <AppBarButton Icon="Stop"
                               Label="Stop"
-                              Name="StopAppBarButton"/>
+                              Name="StopAppBarButton"
+                              Click="StopAppBarButton_Click"
+                              Visibility="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay,Converter={StaticResource StateToVisibilityConverter}}"/>
             </CommandBar>
 
 

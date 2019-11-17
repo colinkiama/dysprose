@@ -28,5 +28,15 @@ namespace DysproseTwo.View
         {
             this.InitializeComponent();
         }
+
+        private void StopAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PausePlayAppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

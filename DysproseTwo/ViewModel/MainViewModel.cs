@@ -1,4 +1,5 @@
-﻿using DysproseTwo.Model;
+﻿using DysproseTwo.Enums;
+using DysproseTwo.Model;
 using DysproseTwo.Services;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,20 @@ namespace DysproseTwo.ViewModel
             }
         }
 
+        private DysproseSessionState _currentSessionState;
+
+        public DysproseSessionState CurrentSessionState
+        {
+            get { return _currentSessionState; }
+            set
+            {
+                _currentSessionState = value;
+                SessionService.Instance.UpdateSessionState(_currentSessionState);
+                NotifyPropertyChanged();
+            }
+        }
+
+
 
         public FadeTimerService FadeTimerService { get => _fadeTimerService; private set => _fadeTimerService = value; }
 
@@ -64,6 +79,9 @@ namespace DysproseTwo.ViewModel
             CurrentSession = new Session();
             FillInDetailsFromSession();
             FontSize = SettingsService.Instance.GlobalSettings.FontSize;
+
+            // Just for testing
+            CurrentSessionState = DysproseSessionState.Stopped;
         }
 
         private void FillInDetailsFromSession()
@@ -97,8 +115,11 @@ namespace DysproseTwo.ViewModel
 
         internal async Task StartAsync()
         {
-            CurrentSession.StartSession();
-            await FadeTimerService.StartAsync().ConfigureAwait(true);
+            bool hasSessionStarted = CurrentSession.StartSession();
+            if (hasSessionStarted)
+            {
+                await FadeTimerService.StartAsync().ConfigureAwait(true);
+            }
         }
 
         internal async Task PauseAsync()

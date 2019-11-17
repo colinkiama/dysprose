@@ -26,7 +26,7 @@ namespace DysproseTwo.Model
         public event EventHandler<DysproseSessionLength> SessionLengthUpdated;
         public event EventHandler<int> FadeIntervalUpdated;
         public event EventHandler<TimeSpan> TimerTicked;
-        public event EventHandler TimerEnded;
+        public event EventHandler SessionCompleted;
 
         public Session()
         {
@@ -40,7 +40,7 @@ namespace DysproseTwo.Model
 
         private void Timer_TimerEnded(object sender, EventArgs e)
         {
-            TimerEnded?.Invoke(sender, e);
+            SessionCompleted?.Invoke(sender, e);
         }
 
         private void Timer_TimerTicked(object sender, TimeSpan e)
