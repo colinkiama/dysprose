@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DysproseTwo.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,11 +29,12 @@ namespace DysproseTwo.Dialogs
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
-
+            ShareService.Instance.ShareSessionText(_sessionText);
         }
 
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            ShareService.CopySessionText(_sessionText);
         }
     }
 }

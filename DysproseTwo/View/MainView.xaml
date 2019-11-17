@@ -314,8 +314,9 @@
                  VerticalAlignment="Stretch"
                  PlaceholderText="Start writing here..."
                  FontSize="{x:Bind _viewModel.FontSize, Mode=OneWay}"
-                 TextChanged="FadeTextBox_TextChanged"
-                 IsEnabled="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToBooleanConverter}}">
+                 IsEnabled="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToBooleanConverter}}"
+                     Text="{x:Bind _viewModel.SessionText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     TextChanged="FadeTextBox_TextChanged">
 
             </TextBox>
         </ScrollViewer>

@@ -1,4 +1,5 @@
-﻿using DysproseTwo.Enums;
+﻿using DysproseTwo.Dialogs;
+using DysproseTwo.Enums;
 using DysproseTwo.Model;
 using DysproseTwo.Services;
 using System;
@@ -79,6 +80,23 @@ namespace DysproseTwo.ViewModel
             }
         }
 
+        private string _sessionText;
+
+        public string SessionText
+        {
+            get { return _sessionText; }
+            set
+            {
+                if (_sessionText != value)
+                {
+                    _sessionText = value;
+                    NotifyPropertyChanged();
+
+                }
+            }
+        }
+
+      
 
         public MainViewModel()
         {
@@ -86,7 +104,16 @@ namespace DysproseTwo.ViewModel
             FontSize = SettingsService.Instance.GlobalSettings.FontSize;
             CurrentSessionState = DysproseSessionState.Stopped;
             FadeTimerService = new FadeTimerService();
+            FadeTimerService.FadeCompleted += FadeTimerService_FadeCompleted;
+            SessionText = "";
         }
+
+        private void FadeTimerService_FadeCompleted(object sender, Microsoft.Toolkit.Uwp.UI.Animations.AnimationSetCompletedEventArgs e)
+        {
+            SessionText = "";
+        }
+
+        
 
         private void FillInDetailsFromSession()
         {
@@ -96,13 +123,23 @@ namespace DysproseTwo.ViewModel
 
             _sessionLength = TimeSpan.FromMilliseconds(CurrentSession.Settings.SessionLength.TimeInMilliseconds);
             CurrentSessionTime = _sessionLength;
-            
+
         }
 
         private async void CurrentSession_SessionCompleted(object sender, EventArgs e)
         {
             CurrentSessionTime = new TimeSpan(0);
             await FadeTimerService.StopAsync();
+            try
+            {
+                var sessionCompletedDialog = new SessionCompletedDialog(SessionText);
+                await sessionCompletedDialog.ShowAsync();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
 
         private void CurrentSession_StateChanged(object sender, DysproseSessionState newState)
