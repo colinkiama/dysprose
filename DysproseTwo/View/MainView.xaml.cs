@@ -1,4 +1,6 @@
-﻿using DysproseTwo.ViewModel;
+﻿using DysproseTwo.Dialogs;
+using DysproseTwo.Services;
+using DysproseTwo.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -75,6 +77,34 @@ namespace DysproseTwo.View
                     await _viewModel.FadeTimerService.StopAsync();
                 } 
             }
+        }
+
+        private async void ShowDialogButton_Click(object sender, RoutedEventArgs e)
+        {
+            string sessionText = FadeTextBox.Text;
+            try
+            {
+                var sessionCompletedDialog = new SessionCompletedDialog(sessionText);
+                await sessionCompletedDialog.ShowAsync();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        private void FlyoutShareClick(object sender, RoutedEventArgs e)
+        {
+            string sessionText = FadeTextBox.Text;
+            ShareService.Instance.ShareSessionText(sessionText);
+        }
+
+        private void FlyoutCopyClick(object sender, RoutedEventArgs e)
+        {
+            string sessionText = FadeTextBox.Text;
+            ShareService.CopySessionText(sessionText);
         }
     }
 }

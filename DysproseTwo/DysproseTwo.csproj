@@ -132,7 +132,11 @@
     <Compile Include="Converters\SessionStateToBool.cs" />
     <Compile Include="Converters\SessionStateToPausePlayIcon.cs" />
     <Compile Include="Converters\SessionStateToPlayPauseLabel.cs" />
+    <Compile Include="Converters\SessionStateToShareVisibility.cs" />
     <Compile Include="Converters\SessionStateToVisibility.cs" />
+    <Compile Include="Dialogs\SessionCompletedDialog.xaml.cs">
+      <DependentUpon>SessionCompletedDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Enums\DysproseSessionState.cs" />
     <Compile Include="Enums\TimeUnit.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
@@ -144,6 +148,7 @@
     <Compile Include="Services\MenuButtonService.cs" />
     <Compile Include="Services\SessionService.cs" />
     <Compile Include="Services\SettingsService.cs" />
+    <Compile Include="Services\ShareService.cs" />
     <Compile Include="Structs\DysproseGlobalSettings.cs" />
     <Compile Include="Structs\DysproseSessionSettings.cs" />
     <Compile Include="Structs\DysproseSessionLength.cs" />
@@ -180,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Dialogs\SessionCompletedDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\DysprosePageDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

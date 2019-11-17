@@ -13,6 +13,7 @@
         <converters:SessionStateToVisibility x:Key="StateToVisibilityConverter"/>
         <converters:SessionStateToPlayPauseLabel x:Key="StateToPausePlayLabelConverter"/>
         <converters:SessionStateToBool x:Key="StateToBooleanConverter"/>
+        <converters:SessionStateToShareVisibility x:Key="StateToShareVisibilityConverter"/>
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -258,11 +259,27 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <RelativePanel Name="TopRelativePanel">
-            
+            <!--<Button Content="Show Dialog"
+                    RelativePanel.LeftOf="SessionCommandBar"
+                    Name="ShowDialogButton"
+                    Click="ShowDialogButton_Click"/>-->
 
             <CommandBar RelativePanel.AlignHorizontalCenterWithPanel="True"
-                        Background="Transparent">
-              
+                        Background="Transparent"
+                        Name="SessionCommandBar">
+
+                <AppBarButton Icon="Share"
+                              Label="Share"
+                              Name="ShareAppBarButton"
+                              Visibility="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToShareVisibilityConverter}}">
+                    <AppBarButton.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Icon="Share" Text="Share UI" Click="FlyoutShareClick"/>
+                            <MenuFlyoutItem Icon="Copy" Text="Copy Text" Click="FlyoutCopyClick"/>
+                        </MenuFlyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+                
                 <AppBarButton Icon="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToIconConverter}}"
                               Label="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToPausePlayLabelConverter}}"
                               Name="PausePlayAppBarButton"
@@ -288,7 +305,7 @@
         <ScrollViewer Grid.Row="1"
                       Margin="0,20,0,0"
                       Name="TextBoxScrollViewer">
-            <TextBox Background="Transparent"
+            <TextBox Background="Transparent"   
                  Name="FadeTextBox"
                  AcceptsReturn="True"
                  TextWrapping="Wrap"
