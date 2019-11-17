@@ -257,7 +257,8 @@
                  HorizontalAlignment="Stretch"
                  VerticalAlignment="Stretch"
                  PlaceholderText="Start writing here..."
-                 Margin="0,20,0,0"></TextBox>
+                 Margin="0,20,0,0"
+                 FontSize="{x:Bind _viewModel.FontSize, Mode=OneWay}"></TextBox>
 
         <TextBlock Grid.Row="2"
                    Name="WordCountTextBlock"

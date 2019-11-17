@@ -71,5 +71,10 @@ namespace DysproseTwo.Services
         {
             await _controlToFade.Fade(1, 0).StartAsync().ConfigureAwait(true);
         }
+
+        internal void UpdateFadeInterval(int updatedFadeInterval)
+        {
+            _fadeAnimationTime = updatedFadeInterval;
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace DysproseTwo.Model
             return willStart;
         }
 
-        public void PauseTimer()
+        public void StopTimer()
         {
             timer.Stop();
         }

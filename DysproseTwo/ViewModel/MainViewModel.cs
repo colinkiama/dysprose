@@ -11,14 +11,28 @@ using Windows.UI.Xaml;
 
 namespace DysproseTwo.ViewModel
 {
-    class MainPageViewModel : Notifier
+    class MainViewModel : Notifier
     {
+
+        private double _fontSize;
+
+        public double FontSize
+        {
+            get { return _fontSize; }
+            set
+            {
+                _fontSize = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         private TimeSpan _sessionLength;
 
         private TimeSpan _currentSessionTime;
 
         private FadeTimerService _fadeTimerService;
-        
+
         public TimeSpan CurrentSessionTime
         {
             get { return _currentSessionTime; }
@@ -29,7 +43,7 @@ namespace DysproseTwo.ViewModel
             }
         }
 
-        
+
         public FadeTimerService FadeTimerService { get => _fadeTimerService; private set => _fadeTimerService = value; }
 
         private Session _session;
@@ -45,13 +59,34 @@ namespace DysproseTwo.ViewModel
         }
 
 
-        public MainPageViewModel()
+        public MainViewModel()
         {
             CurrentSession = new Session();
-            _sessionLength = TimeSpan.FromMilliseconds(CurrentSession.Settings.SessionLength.TimeInMilliseconds);
-            CurrentSessionTime = _sessionLength;
+            FillInDetailsFromSession();
+            FontSize = SettingsService.Instance.GlobalSettings.FontSize;
+        }
+
+        private void FillInDetailsFromSession()
+        {
             CurrentSession.Timer.TimerTicked += Timer_TimerTicked;
             CurrentSession.Timer.TimerEnded += Timer_TimerEnded;
+            _sessionLength = TimeSpan.FromMilliseconds(CurrentSession.Settings.SessionLength.TimeInMilliseconds);
+            CurrentSessionTime = _sessionLength;
+            SettingsService.Instance.GlobalSettingsUpdated += Instance_GlobalSettingsUpdated;
+            SettingsService.Instance.SessionSettingsUpdated += Instance_SessionSettingsUpdated;
+        }
+
+
+
+        private void Instance_SessionSettingsUpdated(object sender, Structs.DysproseSessionSettings e)
+        {
+            CurrentSession = new Session(e);
+            FillInDetailsFromSession();
+        }
+
+        private void Instance_GlobalSettingsUpdated(object sender, Structs.DysproseGlobalSettings globalSettings)
+        {
+            FontSize = globalSettings.FontSize;
         }
 
         internal async Task ResumeAsync()
@@ -89,6 +124,11 @@ namespace DysproseTwo.ViewModel
         private void Timer_TimerTicked(object sender, TimeSpan timeElapsed)
         {
             CurrentSessionTime = _sessionLength - timeElapsed;
+        }
+
+        public void UpdateFadeTime(int updatedFadeInterval)
+        {
+            FadeTimerService.UpdateFadeInterval(updatedFadeInterval);
         }
 
     }

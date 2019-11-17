@@ -23,7 +23,7 @@ namespace DysproseTwo
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        MainPageViewModel ViewModel = new MainPageViewModel();
+        //MainViewModel ViewModel = new MainViewModel();
         public MainPage()
         {
             this.InitializeComponent();
@@ -32,8 +32,8 @@ namespace DysproseTwo
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            ViewModel.ObtainFadeElement(FadeTextBox);
-            ViewModel.FadeTimerService.FadeCompleted += FadeTimerService_FadeCompleted;
+            //ViewModel.ObtainFadeElement(FadeTextBox);
+            //ViewModel.FadeTimerService.FadeCompleted += FadeTimerService_FadeCompleted;
         }
 
         private void FadeTimerService_FadeCompleted(object sender, Microsoft.Toolkit.Uwp.UI.Animations.AnimationSetCompletedEventArgs e)
@@ -43,30 +43,30 @@ namespace DysproseTwo
 
         private async void TimerButton_Click(object sender, RoutedEventArgs e)
         {
-            switch (ViewModel.CurrentSession.State)
-            {
-                case Enums.DysproseSessionState.InProgress:
-                    await ViewModel.PauseAsync().ConfigureAwait(true);
-                    break;
-                case Enums.DysproseSessionState.Paused:
-                    await ViewModel.ResumeAsync().ConfigureAwait(true);
-                    break;
-                case Enums.DysproseSessionState.Stopped:
-                    await ViewModel.StartAsync().ConfigureAwait(true);
-                    break;
-            }
+            //switch (ViewModel.CurrentSession.State)
+            //{
+            //    case Enums.DysproseSessionState.InProgress:
+            //        await ViewModel.PauseAsync().ConfigureAwait(true);
+            //        break;
+            //    case Enums.DysproseSessionState.Paused:
+            //        await ViewModel.ResumeAsync().ConfigureAwait(true);
+            //        break;
+            //    case Enums.DysproseSessionState.Stopped:
+            //        await ViewModel.StartAsync().ConfigureAwait(true);
+            //        break;
+            //}
         }
 
         private async void FadeTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (FadeTextBox.Text.Length > 0)
-            {
-                await ViewModel.FadeTimerService.StartAsync().ConfigureAwait(true);
-            }
-            else
-            {
-                await ViewModel.FadeTimerService.StopAsync().ConfigureAwait(true);
-            }
+            //if (FadeTextBox.Text.Length > 0)
+            //{
+            //    await ViewModel.FadeTimerService.StartAsync().ConfigureAwait(true);
+            //}
+            //else
+            //{
+            //    await ViewModel.FadeTimerService.StopAsync().ConfigureAwait(true);
+            //}
         }
     }
 }

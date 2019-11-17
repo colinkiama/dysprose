@@ -1,4 +1,5 @@
 ﻿using DysproseTwo.Enums;
+using DysproseTwo.Services;
 using DysproseTwo.Structs;
 using System;
 using System.Collections.Generic;
@@ -15,23 +16,83 @@ namespace DysproseTwo.Model
         private string textData;
         private SessionTimer timer;
         private DysproseSessionState state;
-        
+        private DysproseSessionSettings e;
 
         public DysproseSessionSettings Settings { get => settings; set => settings = value; }
         public string TextData { get => textData; set => textData = value; }
         public SessionTimer Timer { get => timer; set => timer = value; }
         public DysproseSessionState State { get => state; set => state = value; }
 
-        public event EventHandler<double> FontSizeUpdated;
+        public event EventHandler<DysproseSessionLength> SessionLengthUpdated;
+        public event EventHandler<int> FadeIntervalUpdated;
+        public event EventHandler<TimeSpan> TimerTicked;
+        public event EventHandler TimerEnded;
 
         public Session()
         {
-            Settings = new DysproseSessionSettings { SessionLength = new DysproseSessionLength { Length = 1, UnitOfLength = TimeUnit.Seconds } , FadeInterval = 5 };
+            var loadedSessionSettings = SettingsService.Instance.SessionSettings;
+            Settings = new DysproseSessionSettings {SessionLength = loadedSessionSettings.SessionLength , FadeInterval = loadedSessionSettings.FadeInterval};
             State = DysproseSessionState.Stopped;
-            Timer = new SessionTimer(Settings.SessionLength);
+            Timer = new SessionTimer(settings.SessionLength);
+            Timer.TimerTicked += Timer_TimerTicked;
+            Timer.TimerEnded += Timer_TimerEnded;
+        }
+
+        private void Timer_TimerEnded(object sender, EventArgs e)
+        {
+            TimerEnded?.Invoke(sender, e);
+        }
+
+        private void Timer_TimerTicked(object sender, TimeSpan e)
+        {
+            TimerTicked?.Invoke(sender, e);
+        }
+
+        public Session(DysproseSessionSettings sessionSettings)
+        {
+            Settings = sessionSettings;
+            Timer = new SessionTimer(settings.SessionLength);
+            State = DysproseSessionState.Stopped;
         }
 
         public bool StartSession()
+        {
+            Timer = new SessionTimer(settings.SessionLength);
+            bool hasStarted = Timer.StartTimer();
+            if (hasStarted)
+            {
+                State = DysproseSessionState.InProgress;
+            }
+            return hasStarted;
+        }
+
+        public void UpdateSessionLength(DysproseSessionLength updatedSessionLength)
+        {
+            var oldSettings = Settings;
+            Settings = new DysproseSessionSettings { FadeInterval = 5, SessionLength = updatedSessionLength };
+            SessionLengthUpdated?.Invoke(this, updatedSessionLength);
+        }
+
+        public void UpdateFadeInterval(int updatedFadeInterval)
+        {
+            var oldSettings = Settings;
+            Settings = new DysproseSessionSettings { FadeInterval = updatedFadeInterval, SessionLength = oldSettings.SessionLength };
+            FadeIntervalUpdated?.Invoke(this, updatedFadeInterval);
+        }
+
+        public void PauseSession()
+        {
+            Timer.StopTimer();
+            State = DysproseSessionState.Paused;
+        }
+
+        public void StopSession()
+        {
+            Timer.StopTimer();
+            State = DysproseSessionState.Stopped;
+        }
+
+        public bool ResumeSession()
         {
             bool hasStarted = Timer.StartTimer();
             if (hasStarted)
@@ -41,23 +102,5 @@ namespace DysproseTwo.Model
             return hasStarted;
         }
 
-        public void UpdateFont(double updatedFontSize)
-        {
-            var oldSettings = Settings;
-            Settings = new DysproseSessionSettings { FadeInterval = 5, SessionLength = oldSettings.SessionLength };
-            FontSizeUpdated?.Invoke(this, updatedFontSize);
-        }
-
-        public void UpdateFadeInterval(int updatedFadeInterval)
-        {
-            var oldSettings = Settings;
-            Settings = new DysproseSessionSettings { FadeInterval = updatedFadeInterval, SessionLength = oldSettings.SessionLength };
-        }
-
-        public void PauseSession()
-        {
-            Timer.PauseTimer();
-            State = DysproseSessionState.Paused;
-        }
     }
 }

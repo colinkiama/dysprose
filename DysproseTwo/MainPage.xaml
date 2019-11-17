@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel>
-            <TextBlock Text="{x:Bind ViewModel.CurrentSessionTime, Mode=OneWay}"/>
+            <!--<TextBlock Text="{x:Bind ViewModel.CurrentSessionTime, Mode=OneWay}"/>-->
             <Button Content="TimerButton"
                     Name="TimerButton"
                     Click="TimerButton_Click"/>

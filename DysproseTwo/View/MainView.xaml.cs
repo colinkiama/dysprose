@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DysproseTwo.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace DysproseTwo.View
     /// </summary>
     public sealed partial class MainView : Page
     {
+        MainViewModel _viewModel = new MainViewModel();
         public MainView()
         {
             this.InitializeComponent();

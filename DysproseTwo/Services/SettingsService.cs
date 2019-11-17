@@ -30,18 +30,18 @@ namespace DysproseTwo.Services
 
         public void UpdateSessionSettings(DysproseSessionSettings sessionSettings)
         {
-            if (sessionSettings != _sessionSettings)
+            if (sessionSettings != this._sessionSettings)
             {
-                sessionSettings = _sessionSettings;
+                this._sessionSettings = sessionSettings;
                 SessionSettingsUpdated?.Invoke(this, sessionSettings);
             }
         }
 
         public void UpdateGlobalSettings(DysproseGlobalSettings globalSettings)
         {
-            if (globalSettings != _globalSettings)
+            if (globalSettings != this._globalSettings)
             {
-                globalSettings = _globalSettings;
+                this._globalSettings = globalSettings;
                 GlobalSettingsUpdated?.Invoke(this, globalSettings);
             }
         }
