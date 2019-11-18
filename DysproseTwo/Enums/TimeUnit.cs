@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DysproseTwo.Enums
 {
+    // Values are the number of milliseconds in each unit
     public enum TimeUnit
     {
         Seconds = 1000,

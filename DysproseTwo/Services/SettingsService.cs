@@ -70,7 +70,7 @@ namespace DysproseTwo.Services
                 // TODO: Load from file
                 SessionSettings = new DysproseSessionSettings
                 {
-                    FadeInterval = 5,
+                    FadeInterval = 10,
                     SessionLength = new DysproseSessionLength
                     {
                         Length = 1,
