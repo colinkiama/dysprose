@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="bebf886f-806c-47fa-8223-807f8b3fec2b"
-    Publisher="CN=colin"
-    Version="2.0.0.0" />
+    Name="64942ColinKiama.Dysprose"
+    Publisher="CN=D2DBA6D7-296F-484A-BABE-2B76C9C2AF78"
+    Version="2.0.1.0" />
 
-  <mp:PhoneIdentity PhoneProductId="bebf886f-806c-47fa-8223-807f8b3fec2b" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="b02ee598-9f42-4cfd-9ce8-7ebb251303e9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>DysproseTwo</DisplayName>
-    <PublisherDisplayName>colin</PublisherDisplayName>
+    <DisplayName>Dysprose</DisplayName>
+    <PublisherDisplayName>Colin Kiama</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -32,7 +32,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="DysproseTwo.App">
       <uap:VisualElements
-        DisplayName="DysproseTwo"
+        DisplayName="Dysprose"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="DysproseTwo"
