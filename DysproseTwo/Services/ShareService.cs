@@ -30,7 +30,7 @@ namespace DysproseTwo.Services
         {
             DataRequest request = args.Request;
             request.Data.SetText(_textToShare);
-            request.Data.Properties.Title = "Dysprose: Share the work you've done in txhis session.";
+            request.Data.Properties.Title = "Dysprose: Share the work you've done in this session.";
         }
 
         public void ShareSessionText(string sessionText)

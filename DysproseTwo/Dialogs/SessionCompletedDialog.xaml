@@ -14,7 +14,7 @@
     CloseButtonText="Close">
 
     <Grid>
-        <TextBlock Text="Decide the next action"
+        <TextBlock Text="You are now free to copy or share your work!"
                    TextWrapping="WrapWholeWords"/>
     </Grid>
 </ContentDialog>
