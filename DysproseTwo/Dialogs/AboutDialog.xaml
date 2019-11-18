@@ -9,25 +9,29 @@
     Title="TITLE"
     CloseButtonText="Close">
     <ContentDialog.Resources>
+        <x:String x:Key="ReviewString">ms-windows-store://review/?ProductId=9NNZQ38B48ZJ</x:String>
         <x:String x:Key="FeedbackString">mailto:colinkiama@gmail.com?subject=Dysprose%20Feedback&amp;body=[Write Feedback Here]</x:String>
         <x:String x:Key="WebsiteString">https://www.colinkiama.com</x:String>
         <x:String x:Key="GitHubString">https://www.github.com/colinkiama</x:String>
     </ContentDialog.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <StackPanel>
-            <TextBlock x:Name="VersionTextBlock"/>
-            <HyperlinkButton Name="FeedbackLink" NavigateUri="{StaticResource FeedbackString}" Content="Feedback"
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock x:Name="VersionTextBlock"/>
+                <HyperlinkButton Name="ReviewLink" NavigateUri="{StaticResource ReviewString}" Content="Rate/Review this app"
                              Margin="0,8,0,0"/>
-            <HyperlinkButton Name="WebsiteLink" NavigateUri="{StaticResource WebsiteString}" Content="Website"/>
-            <HyperlinkButton Name="GitHubLink" NavigateUri="{StaticResource GitHubString}" Content="GitHub"/>
-        </StackPanel>
-        <TextBlock Grid.Row="1" Text="Colin Kiama - 2019" FontWeight="SemiBold"
+                <HyperlinkButton Name="FeedbackLink" NavigateUri="{StaticResource FeedbackString}" Content="Feedback"/>
+                <HyperlinkButton Name="WebsiteLink" NavigateUri="{StaticResource WebsiteString}" Content="Website"/>
+                <HyperlinkButton Name="GitHubLink" NavigateUri="{StaticResource GitHubString}" Content="GitHub"/>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Text="Colin Kiama - 2019" FontWeight="SemiBold"
                    VerticalAlignment="Bottom"
                    Margin="0,12,0,0"/>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </ContentDialog>
