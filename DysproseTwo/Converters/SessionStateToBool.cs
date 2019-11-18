@@ -12,18 +12,18 @@ namespace DysproseTwo.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            bool isEnabled = false;
+            bool isReadOnly = true;
             if (value is DysproseSessionState sessionState)
             {
                 switch (sessionState)
                 {
                     case DysproseSessionState.InProgress:
-                        isEnabled = true;
+                        isReadOnly = false;
                         break;
                 }
             }
 
-            return isEnabled;
+            return isReadOnly;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

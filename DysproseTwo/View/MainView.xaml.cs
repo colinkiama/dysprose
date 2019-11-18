@@ -38,7 +38,7 @@ namespace DysproseTwo.View
             base.OnNavigatedTo(e);
         }
 
-       
+
 
         private async void StopAppBarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -61,7 +61,7 @@ namespace DysproseTwo.View
             }
         }
 
-       
+
 
         private async void ShowDialogButton_Click(object sender, RoutedEventArgs e)
         {
@@ -93,19 +93,26 @@ namespace DysproseTwo.View
 
         private async void FadeTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            
-                if (_viewModel.CurrentSessionState == DysproseSessionState.InProgress)
+
+            if (_viewModel.CurrentSessionState == DysproseSessionState.InProgress)
+            {
+                if (FadeTextBox.Text.Length > 0)
                 {
-                    if (FadeTextBox.Text.Length > 0)
-                    {
-                        await _viewModel.FadeTimerService.StartAsync();
-                    }
-                    else
-                    {
-                        await _viewModel.FadeTimerService.StopAsync();
-                    }
+                    await _viewModel.FadeTimerService.StartAsync();
+                }
+                else
+                {
+                    await _viewModel.FadeTimerService.StopAsync();
                 }
             }
-        
+        }
+
+        private void FadeTextBox_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            if (_viewModel.CurrentSessionState != DysproseSessionState.Stopped)
+            {
+                FadeTextBox.SelectionLength = 0;
+            }
+        }
     }
 }
