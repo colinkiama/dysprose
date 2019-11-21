@@ -9,7 +9,7 @@
   <Identity
     Name="64942ColinKiama.Dysprose"
     Publisher="CN=D2DBA6D7-296F-484A-BABE-2B76C9C2AF78"
-    Version="2.0.4.0" />
+    Version="2.1.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="b02ee598-9f42-4cfd-9ce8-7ebb251303e9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
