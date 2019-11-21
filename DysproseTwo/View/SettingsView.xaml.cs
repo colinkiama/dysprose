@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -46,6 +47,19 @@ namespace DysproseTwo.View
             catch (Exception)
             {
 
+            }
+        }
+
+        private void FullScreenModeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var appView = ApplicationView.GetForCurrentView();
+            if (appView.IsFullScreenMode)
+            {
+                appView.ExitFullScreenMode();
+            }
+            else
+            {
+                appView.TryEnterFullScreenMode();
             }
         }
     }

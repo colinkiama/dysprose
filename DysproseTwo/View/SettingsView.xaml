@@ -76,7 +76,13 @@
                           contract7Present:IsEditable="True"
                           contract7Present:Text="{x:Bind _viewModel.FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           />
-
+                <TextBlock Text="Full-screen Mode:"
+                           Margin="0,20,0,0"/>
+                <Button Content="Toggle full-screen mode"
+                        Margin="0,4,0,0"
+                        Name="FullScreenModeButton"
+                        Click="FullScreenModeButton_Click"/>
+    
             </StackPanel>
         </ScrollViewer>
         <Button Grid.Row="2" Content="About"
