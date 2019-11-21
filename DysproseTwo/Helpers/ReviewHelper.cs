@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.System;
@@ -104,7 +101,7 @@ namespace DysproseTwo.Helpers
         {
             if (args.Result == ContentDialogResult.Primary)
             {
-                await Launcher.LaunchUriAsync(new Uri("mailto:colinkiama@gmail.com?subject=PaletteBook%20Feedback&body=<Write%20your%20feedback%20here>"));
+                await Launcher.LaunchUriAsync(new Uri("mailto:colinkiama@gmail.com?subject=Dysprose%20Feedback&body=<Write%20your%20feedback%20here>"));
             }
         }
 
