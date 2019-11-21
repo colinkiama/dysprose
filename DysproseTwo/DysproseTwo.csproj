@@ -145,6 +145,7 @@
     <Compile Include="Enums\DysproseSessionState.cs" />
     <Compile Include="Enums\TimeUnit.cs" />
     <Compile Include="Helpers\AnimationHelper.cs" />
+    <Compile Include="Helpers\ReviewHelper.cs" />
     <Compile Include="Helpers\WordCountHelper.cs" />
     <Compile Include="Model\GlobalSettings.cs" />
     <Compile Include="Model\Session.cs" />

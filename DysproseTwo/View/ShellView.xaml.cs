@@ -37,12 +37,13 @@ namespace DysproseTwo.View
             SettingsFrame.Visibility = Visibility.Collapsed;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             MainFrame.Navigate(typeof(MainView));
             SettingsFrame.Navigate(typeof(SettingsView));
             SettingsFrame.Visibility = Visibility.Collapsed;
+            await ReviewHelper.TryRequestReviewAsync();
         }
 
         private async void MenuButton_Click(object sender, RoutedEventArgs e)
