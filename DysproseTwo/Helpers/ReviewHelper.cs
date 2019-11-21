@@ -12,8 +12,6 @@ namespace DysproseTwo.Helpers
         const string noMorePromptsSettingsValue = "noMorePrompts";
         static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
-        // Recommended: Run this at app launch/activation
-
         static ReviewHelper()
         {
             TryUpdateLaunchCount();
