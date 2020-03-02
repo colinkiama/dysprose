@@ -14,42 +14,46 @@ namespace DysproseTwo.Model
         public event EventHandler<TimeSpan> TimerTicked;
         public event EventHandler TimerEnded;
         DispatcherTimer timer;
-        int timesTicked = 0;
-        int timesToTick = 0;
+        long ticksPassed = 0;
+        long ticksToPass = 0;
+        DateTime lastTime = DateTime.MinValue;
 
 
         public SessionTimer(DysproseSessionLength sessionTime)
         {
             timer = new DispatcherTimer();
-            timesTicked = 0;
+            ticksPassed = 0;
             timer.Tick += Timer_Tick;
             timer.Interval = new TimeSpan(0, 0, 0, 0, 250);
-
-            timesToTick = (int)Math.Ceiling(sessionTime.TimeInMilliseconds / timer.Interval.TotalMilliseconds);
+            ticksToPass = TimeSpan.FromMilliseconds(sessionTime.TimeInMilliseconds).Ticks;
         }
 
         private void Timer_Tick(object sender, object e)
         {
-            timesTicked++;
-            Debug.WriteLine($"Times ticked: {timesTicked}/{timesToTick}");
-            if (timesTicked > timesToTick)
+            DateTime currentTime = DateTime.UtcNow;
+            TimeSpan timeElapsed = currentTime - lastTime;
+            lastTime = DateTime.UtcNow;
+            ticksPassed += timeElapsed.Ticks;
+            Debug.WriteLine($"Ticks Passed: {ticksPassed}");
+            if (ticksPassed > ticksToPass)
             {
                 timer.Stop();
                 TimerEnded?.Invoke(sender, EventArgs.Empty);
             }
             else
             {
-                TimeSpan timeElapsed = TimeSpan.FromSeconds(timer.Interval.TotalSeconds * timesTicked);
-                TimerTicked?.Invoke(this, timeElapsed);
+                TimeSpan totalTimeElapsed = TimeSpan.FromTicks(ticksPassed);
+                TimerTicked?.Invoke(this, totalTimeElapsed);
             }
             
         }
 
         public bool StartTimer()
         {
-            bool willStart = timesToTick > timesTicked;
+            bool willStart = ticksToPass > ticksPassed;
             if (willStart)
             {
+                lastTime = DateTime.UtcNow;
                 timer.Start();
             }
 

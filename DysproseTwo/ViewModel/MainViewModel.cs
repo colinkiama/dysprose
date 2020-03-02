@@ -223,6 +223,7 @@ namespace DysproseTwo.ViewModel
         {
             CurrentSessionTime = _sessionLength - timeElapsed;
             SessionInverseProgress = CurrentSessionTime.TotalMilliseconds / _sessionLength.TotalMilliseconds;
+            
         }
     }
 }
