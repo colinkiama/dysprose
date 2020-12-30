@@ -69,9 +69,11 @@
                      Margin="0,20,0,0"
                          Text="{x:Bind _viewModel.FadeIntervalValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
-                <ToggleSwitch Header="Disable Back-Edits"
+                <ToggleSwitch Header="Disable Back-edits:"
                               Margin="0,20,0,0"
                               IsOn="{x:Bind _viewModel.AreBackEditsDisabled, Mode=TwoWay}"
+                              OffContent="No"
+                              OnContent="Yes"
                               IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
                 <ComboBox Header="Font Size:"
                      Margin="0,20,0,0"
