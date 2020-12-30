@@ -25,8 +25,8 @@ namespace DysproseTwo.View
     /// </summary>
     public sealed partial class SettingsView : Page
     {
-        SettingsViewModel _viewModel = new SettingsViewModel();
-        AboutDialog _aboutDialog = new AboutDialog();
+        readonly SettingsViewModel _viewModel = new SettingsViewModel();
+        readonly AboutDialog _aboutDialog = new AboutDialog();
         public SettingsView()
         {
             this.InitializeComponent();

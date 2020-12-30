@@ -261,11 +261,6 @@
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
         <RelativePanel Name="TopRelativePanel">
-            <!--<Button Content="Show Dialog"
-                    RelativePanel.LeftOf="SessionCommandBar"
-                    Name="ShowDialogButton"
-                    Click="ShowDialogButton_Click"/>-->
-
             <CommandBar RelativePanel.AlignHorizontalCenterWithPanel="True"
                         Background="Transparent"
                         Name="SessionCommandBar">

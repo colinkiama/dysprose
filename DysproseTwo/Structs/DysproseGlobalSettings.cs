@@ -8,10 +8,8 @@ namespace DysproseTwo.Structs
 {
     public struct DysproseGlobalSettings : IEquatable<DysproseGlobalSettings>
     {
-        private double _fontSize;
-
-        public double FontSize { get => _fontSize; set => _fontSize = value; }
-
+        public double FontSize { get; set; }
+        public bool IsFullCommitModeEnabled { get; set; }
         public override bool Equals(object obj)
         {
             bool isEqual = false;
@@ -26,7 +24,7 @@ namespace DysproseTwo.Structs
         public override int GetHashCode()
         {
             int hash = 13;
-            hash = (hash * 7) + _fontSize.GetHashCode();
+            hash = (hash * 7) + FontSize.GetHashCode();
 
             return hash;
         }
@@ -43,7 +41,8 @@ namespace DysproseTwo.Structs
 
         public bool Equals(DysproseGlobalSettings other)
         {
-            return this._fontSize == other._fontSize;
+            return this.FontSize == other.FontSize
+                && this.IsFullCommitModeEnabled == other.IsFullCommitModeEnabled;
         }
     }
 }

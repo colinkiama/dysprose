@@ -10,13 +10,12 @@ namespace DysproseTwo.Services
     public class ShareService
     {
         // Singleton Pattern with "Lazy"
-        private ShareService _shareService = null;
-        private static Lazy<ShareService> lazy =
+        private static readonly Lazy<ShareService> lazy =
             new Lazy<ShareService>(() => new ShareService());
 
         public static ShareService Instance => lazy.Value;
 
-        private DataTransferManager _dataTransferManager;
+        private readonly DataTransferManager _dataTransferManager;
 
         private string _textToShare = "";
 
@@ -48,8 +47,10 @@ namespace DysproseTwo.Services
             {
                 if (sessionText.Length > 0)
                 {
-                    DataPackage dataPackage = new DataPackage();
-                    dataPackage.RequestedOperation = DataPackageOperation.Copy;
+                    DataPackage dataPackage = new DataPackage
+                    {
+                        RequestedOperation = DataPackageOperation.Copy
+                    };
                     dataPackage.SetText(sessionText);
                     Clipboard.SetContent(dataPackage);
                 }

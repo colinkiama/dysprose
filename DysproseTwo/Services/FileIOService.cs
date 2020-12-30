@@ -14,14 +14,13 @@ namespace DysproseTwo.Services
     public class FileIOService
     {
         // Singleton Pattern with "Lazy"
-        private FileIOService _fileIOService = null;
-        private static Lazy<FileIOService> lazy =
+        private static readonly Lazy<FileIOService> lazy =
             new Lazy<FileIOService>(() => new FileIOService());
 
         const string GlobalSettingsFileName = "GlobalSettings.json";
         const string SessionSettingsFileName = "SessionSettings.json";
 
-        static StorageFolder localFolder = ApplicationData.Current.LocalFolder;
+        static readonly StorageFolder localFolder = ApplicationData.Current.LocalFolder;
         public static FileIOService Instance => lazy.Value;
 
         private FileIOService() { }

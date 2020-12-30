@@ -172,5 +172,6 @@ namespace DysproseTwo.ViewModel
             SessionLength = sessionSettings.SessionLength.Length;
             SelectedTimeUnit = sessionSettings.SessionLength.UnitOfLength;
         }
+
     }
 }

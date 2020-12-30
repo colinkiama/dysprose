@@ -16,7 +16,6 @@ namespace DysproseTwo.Model
         private string textData;
         private SessionTimer timer;
         private DysproseSessionState state;
-        private DysproseSessionSettings e;
 
         public DysproseSessionSettings Settings { get => settings; set => settings = value; }
         public string TextData { get => textData; set => textData = value; }

@@ -20,8 +20,7 @@ namespace DysproseTwo.Services
         public event EventHandler<DysproseGlobalSettings> GlobalSettingsUpdated;
 
         // Singleton Pattern with "Lazy"
-        private SettingsService _settingsService = null;
-        private static Lazy<SettingsService> lazy =
+        private static readonly Lazy<SettingsService> lazy =
             new Lazy<SettingsService>(() => new SettingsService());
 
         public static SettingsService Instance => lazy.Value;

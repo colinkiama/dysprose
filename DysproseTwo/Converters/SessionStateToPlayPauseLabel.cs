@@ -12,13 +12,16 @@ namespace DysproseTwo.Converters
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            string label = "Play";
+            string label = "Start";
             if (value is DysproseSessionState sessionState)
             {
                 switch (sessionState)
                 {
                     case DysproseSessionState.InProgress:
                         label = "Pause";
+                        break;
+                    case DysproseSessionState.Paused:
+                        label = "Resume";
                         break;
                 }
             }

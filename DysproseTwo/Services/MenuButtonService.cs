@@ -9,8 +9,7 @@ namespace DysproseTwo.Services
     public class MenuButtonService
     {
         // Singleton Pattern with "Lazy"
-        private MenuButtonService _settingsService = null;
-        private static Lazy<MenuButtonService> lazy =
+        private static readonly Lazy<MenuButtonService> lazy =
             new Lazy<MenuButtonService>(() => new MenuButtonService());
 
         public static MenuButtonService Instance => lazy.Value;

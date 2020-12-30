@@ -27,7 +27,7 @@ namespace DysproseTwo.View
     /// </summary>
     public sealed partial class MainView : Page
     {
-        MainViewModel _viewModel = new MainViewModel();
+        readonly MainViewModel _viewModel = new MainViewModel();
         public MainView()
         {
             this.InitializeComponent();
@@ -60,24 +60,6 @@ namespace DysproseTwo.View
                     break;
             }
         }
-
-
-
-        private async void ShowDialogButton_Click(object sender, RoutedEventArgs e)
-        {
-            string sessionText = FadeTextBox.Text;
-            try
-            {
-                var sessionCompletedDialog = new SessionCompletedDialog(sessionText);
-                await sessionCompletedDialog.ShowAsync();
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
-
 
         private void FlyoutShareClick(object sender, RoutedEventArgs e)
         {

@@ -14,7 +14,7 @@ namespace DysproseTwo.Helpers
         // Duration in milliseconds
         const float defaultAnimationDuration = 500;
         const double baseWidth = 400;
-        static List<AnimationSet> _runningFrameAnimations = new List<AnimationSet>();
+        static readonly List<AnimationSet> _runningFrameAnimations = new List<AnimationSet>();
 
         public static event EventHandler FrameSlideOutAnimationCompleted;
         

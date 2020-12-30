@@ -10,7 +10,7 @@ namespace DysproseTwo.Helpers
     {
         const string launchCountSettingsValue = "launchCount";
         const string noMorePromptsSettingsValue = "noMorePrompts";
-        static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        static readonly ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
         static ReviewHelper()
         {
