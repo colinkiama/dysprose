@@ -3,10 +3,6 @@ using DysproseTwo.Services;
 using DysproseTwo.Structs;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DysproseTwo.ViewModel
 {
@@ -77,8 +73,21 @@ namespace DysproseTwo.ViewModel
             }
         }
 
+        private bool _areBackEditsDisabled;
 
-        
+        public bool AreBackEditsDisabled
+        {
+            get { return _areBackEditsDisabled; }
+            set
+            {
+                if (_areBackEditsDisabled != value)
+                {
+                    _areBackEditsDisabled = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
         // Beware of double negative!
         // This was done for easier xaml binding
         private bool _isSessionNotInProgress;
@@ -116,7 +125,7 @@ namespace DysproseTwo.ViewModel
         {
             switch (sessionState)
             {
-                
+
                 case DysproseSessionState.Stopped:
                     IsSessionNotInProgress = true;
                     break;
@@ -148,11 +157,15 @@ namespace DysproseTwo.ViewModel
             if (_isSessionNotInProgress)
             {
                 var sessionSettings = GetSessionSettingsFromViewModel();
-                SettingsService.Instance.UpdateSessionSettings(sessionSettings); 
+                SettingsService.Instance.UpdateSessionSettings(sessionSettings);
             }
         }
 
-        private DysproseGlobalSettings GetGlobalSettingsFromViewModel() => new DysproseGlobalSettings { FontSize = this.FontSize };
+        private DysproseGlobalSettings GetGlobalSettingsFromViewModel() => new DysproseGlobalSettings
+        {
+            FontSize = this.FontSize,
+            AreBackEditsDisabled = this.AreBackEditsDisabled
+        };
 
         private DysproseSessionSettings GetSessionSettingsFromViewModel() => new DysproseSessionSettings
         {
@@ -164,6 +177,7 @@ namespace DysproseTwo.ViewModel
         private void AddGlobalSettingsToViewModel(DysproseGlobalSettings globalSettings)
         {
             FontSize = globalSettings.FontSize;
+            AreBackEditsDisabled = globalSettings.AreBackEditsDisabled;
         }
 
         private void AddSessionSettingsToViewModel(DysproseSessionSettings sessionSettings)

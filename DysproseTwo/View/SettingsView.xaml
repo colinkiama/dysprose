@@ -82,7 +82,10 @@
                         Margin="0,4,0,0"
                         Name="FullScreenModeButton"
                         Click="FullScreenModeButton_Click"/>
-    
+                <ToggleSwitch Header="Disable Back-Edits"
+                              Margin="0,20,0,0"
+                              IsOn="{x:Bind _viewModel.AreBackEditsDisabled, Mode=TwoWay}"/>
+
             </StackPanel>
         </ScrollViewer>
         <Button Grid.Row="2" Content="About"
