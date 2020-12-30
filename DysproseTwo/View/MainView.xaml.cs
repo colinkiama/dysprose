@@ -1,8 +1,6 @@
 ﻿using DysproseTwo.Enums;
 using DysproseTwo.Services;
 using DysproseTwo.ViewModel;
-using System;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -21,61 +19,33 @@ namespace DysproseTwo.View
         public MainView()
         {
             this.InitializeComponent();
-            
+
             FadeTextBox.PreviewKeyDown += HandleFadeTextBoxKeyPress;
             FadeTextBox.PreviewKeyUp += HandleFadeTextBoxKeyPress;
-            FadeTextBox.PointerPressed += HandleFadeTextBoxPointerClick;
-            FadeTextBox.PointerReleased += HandleFadeTextBoxPointerClick;
         }
 
-        private void HandleFadeTextBoxPointerClick(object sender, PointerRoutedEventArgs e)
-        {
-            if (sender is TextBox textBox)
-            {
-                if(textBox.FocusState != FocusState.Unfocused)
-                {
-                }
-            }
-        }
 
         private void HandleFadeTextBoxKeyPress(object sender, KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Back
-                || e.Key == Windows.System.VirtualKey.Delete
-                || e.Key == Windows.System.VirtualKey.Left
-                || e.Key == Windows.System.VirtualKey.Right
-                || e.Key == Windows.System.VirtualKey.Up
-                || e.Key == Windows.System.VirtualKey.Down
-                || e.Key == Windows.System.VirtualKey.Home
-                || e.Key == Windows.System.VirtualKey.End
-                || e.Key == Windows.System.VirtualKey.PageUp
-                || e.Key == Windows.System.VirtualKey.PageDown)
+            if (_viewModel.AreBackEditsDisabled)
             {
-
-                e.Handled = true;
-
-            }
-        }
-
-
-
-        private void CancelPossibleBackEdits(CoreWindow sender, KeyEventArgs args)
-        {
-            if (FadeTextBox.FocusState != FocusState.Unfocused)
-            {
-                if (args.VirtualKey == Windows.System.VirtualKey.Back
-                               || args.VirtualKey == Windows.System.VirtualKey.Delete
-                               || args.VirtualKey == Windows.System.VirtualKey.Left
-                               || args.VirtualKey == Windows.System.VirtualKey.Right
-                               || args.VirtualKey == Windows.System.VirtualKey.Up
-                               || args.VirtualKey == Windows.System.VirtualKey.Down)
+                if (e.Key == Windows.System.VirtualKey.Back
+                               || e.Key == Windows.System.VirtualKey.Delete
+                               || e.Key == Windows.System.VirtualKey.Left
+                               || e.Key == Windows.System.VirtualKey.Right
+                               || e.Key == Windows.System.VirtualKey.Up
+                               || e.Key == Windows.System.VirtualKey.Down
+                               || e.Key == Windows.System.VirtualKey.Home
+                               || e.Key == Windows.System.VirtualKey.End
+                               || e.Key == Windows.System.VirtualKey.PageUp
+                               || e.Key == Windows.System.VirtualKey.PageDown)
                 {
-                    if (!args.KeyStatus.IsMenuKeyDown)
-                    {
-                        args.Handled = true;
-                    }
+
+                    e.Handled = true;
+
                 }
             }
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -139,8 +109,11 @@ namespace DysproseTwo.View
             if (_viewModel.CurrentSessionState != DysproseSessionState.Stopped)
             {
                 FadeTextBox.SelectionLength = 0;
-                // Do when on "no back-edits" mode
-                FadeTextBox.SelectionStart = FadeTextBox.Text.Length;
+
+                if (_viewModel.AreBackEditsDisabled)
+                {
+                    FadeTextBox.SelectionStart = FadeTextBox.Text.Length;
+                }
             }
         }
 

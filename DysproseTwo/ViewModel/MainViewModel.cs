@@ -4,11 +4,6 @@ using DysproseTwo.Helpers;
 using DysproseTwo.Model;
 using DysproseTwo.Services;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
@@ -25,6 +20,18 @@ namespace DysproseTwo.ViewModel
             set
             {
                 _fontSize = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private bool _areBackEditsDisabled;
+
+        public bool AreBackEditsDisabled
+        {
+            get { return _areBackEditsDisabled; }
+            set
+            {
+                _areBackEditsDisabled = value;
                 NotifyPropertyChanged();
             }
         }
@@ -126,6 +133,8 @@ namespace DysproseTwo.ViewModel
         {
             SettingsService.Instance.GlobalSettingsUpdated += Instance_GlobalSettingsUpdated;
             FontSize = SettingsService.Instance.GlobalSettings.FontSize;
+            AreBackEditsDisabled = SettingsService.Instance.GlobalSettings.AreBackEditsDisabled;
+            
             CurrentSessionState = DysproseSessionState.Stopped;
             FadeTimerService = new FadeTimerService();
             FadeTimerService.FadeCompleted += FadeTimerService_FadeCompleted;
@@ -178,6 +187,7 @@ namespace DysproseTwo.ViewModel
         private void Instance_GlobalSettingsUpdated(object sender, Structs.DysproseGlobalSettings globalSettings)
         {
             FontSize = globalSettings.FontSize;
+            AreBackEditsDisabled = globalSettings.AreBackEditsDisabled;
         }
 
         internal async Task ResumeAsync()
@@ -223,7 +233,7 @@ namespace DysproseTwo.ViewModel
         {
             CurrentSessionTime = _sessionLength - timeElapsed;
             SessionInverseProgress = CurrentSessionTime.TotalMilliseconds / _sessionLength.TotalMilliseconds;
-            
+
         }
     }
 }
