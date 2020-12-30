@@ -118,7 +118,7 @@ namespace DysproseTwo.ViewModel
         {
             MenuButtonService.Instance.MenuClosed += Instance_MenuClosed;
             SessionService.Instance.SessionStateChanged += Instance_SessionStateChanged;
-            IsSessionNotInProgress = true;
+            GetSettings();
         }
 
         private void Instance_SessionStateChanged(object sender, DysproseSessionState sessionState)

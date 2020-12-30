@@ -66,8 +66,6 @@ namespace DysproseTwo.ViewModel
             }
         }
 
-
-
         public FadeTimerService FadeTimerService { get => _fadeTimerService; private set => _fadeTimerService = value; }
 
         private Session _session;

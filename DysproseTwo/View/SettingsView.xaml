@@ -5,11 +5,10 @@
     xmlns:local="using:DysproseTwo.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:contract7NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:contract7Present="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:contract7NotPresent="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract, 7)"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.Resources>
             <Thickness x:Key="DysproseCornerButtonMargin">0,0,32,32</Thickness>
@@ -23,7 +22,7 @@
                     </VisualState.StateTriggers>
 
                     <VisualState.Setters>
-                       <Setter Target="SettingsScrollViewer.Padding" Value="{StaticResource DysproseFullWidthPadding}"/>
+                        <Setter Target="SettingsScrollViewer.Padding" Value="{StaticResource DysproseFullWidthPadding}"/>
                         <Setter Target="AboutButton.Margin" Value="{StaticResource DysproseCornerButtonMargin}"/>
                     </VisualState.Setters>
                 </VisualState>
@@ -61,34 +60,36 @@
                          Text="{x:Bind _viewModel.SessionLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
                 <ComboBox x:Name="TimeUnitComboBox"
-                      Margin="0,8,0,0"
-                          ItemsSource="{x:Bind _viewModel.TimeUnits}"
-                          SelectedItem="{x:Bind _viewModel.SelectedTimeUnit, Mode=TwoWay}"
-                          IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
+                        Margin="0,8,0,0"
+                        ItemsSource="{x:Bind _viewModel.TimeUnits}"
+                        SelectedItem="{x:Bind _viewModel.SelectedTimeUnit, Mode=TwoWay}"
+                        IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
                 <TextBox Header="Fade Interval (In seconds):"
-                     Margin="0,20,0,0"
-                         Text="{x:Bind _viewModel.FadeIntervalValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                         IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
+                        Margin="0,20,0,0"
+                        Text="{x:Bind _viewModel.FadeIntervalValue, Mode=TwoWay}"
+                        IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
                 <ToggleSwitch Header="Disable Back-edits:"
                               Margin="0,20,0,0"
                               IsOn="{x:Bind _viewModel.AreBackEditsDisabled, Mode=TwoWay}"
                               OffContent="No"
                               OnContent="Yes"
                               IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
-                <ComboBox Header="Font Size:"
+                <contract7NotPresent:ComboBox Header="Font Size:"
                      Margin="0,20,0,0"
                      ItemsSource="{x:Bind _viewModel.FontList}"
-                          contract7NotPresent:SelectedItem="{x:Bind _viewModel.FontSize, Mode=TwoWay}"
-                          contract7Present:IsEditable="True"
-                          contract7Present:Text="{x:Bind _viewModel.FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          />
+                     SelectedItem="{x:Bind _viewModel.FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <contract7Present:ComboBox Header="Font Size:"
+                     Margin="0,20,0,0"
+                     ItemsSource="{x:Bind _viewModel.FontList}"
+                     SelectedItem="{x:Bind _viewModel.FontSize, Mode=OneWay}"
+                     Text="{x:Bind _viewModel.FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     IsEditable="True"/>
                 <TextBlock Text="Full-screen Mode:"
                            Margin="0,20,0,0"/>
                 <Button Content="Toggle full-screen mode"
                         Margin="0,4,0,0"
                         Name="FullScreenModeButton"
                         Click="FullScreenModeButton_Click"/>
-
             </StackPanel>
         </ScrollViewer>
         <Button Grid.Row="2" Content="About"
