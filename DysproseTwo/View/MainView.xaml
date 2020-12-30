@@ -268,7 +268,8 @@
 
                 <AppBarButton Label="Share"
                               Name="ShareAppBarButton"
-                              Visibility="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToShareVisibilityConverter}}">
+                              Visibility="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToShareVisibilityConverter}}"
+                              ToolTipService.ToolTip="Share">
                     <AppBarButton.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72D;" />
                     </AppBarButton.Icon>
@@ -288,11 +289,13 @@
                               Label="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToPausePlayLabelConverter}}"
                               Name="PausePlayAppBarButton"
                               Click="PausePlayAppBarButton_Click"
+                              ToolTipService.ToolTip="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay, Converter={StaticResource StateToPausePlayLabelConverter}}"
                               />
                 <AppBarButton Icon="Stop"
                               Label="Stop"
                               Name="StopAppBarButton"
                               Click="StopAppBarButton_Click"
+                              ToolTipService.ToolTip="Stop"
                               Visibility="{x:Bind _viewModel.CurrentSessionState, Mode=OneWay,Converter={StaticResource StateToVisibilityConverter}}"/>
             </CommandBar>
 
