@@ -16,6 +16,7 @@
         <converters:SessionStateToBool x:Key="StateToBooleanConverter"/>
         <converters:SessionStateToShareVisibility x:Key="StateToShareVisibilityConverter"/>
         <converters:IntToWordCount x:Key="IntegerToWordCountConverter"/>
+        <converters:SessionTimeToString x:Key="TimeToStringConverter"/>
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -302,7 +303,7 @@
                      RelativePanel.AlignRightWithPanel="True"
                 Value="{x:Bind _viewModel.SessionInverseProgress, Mode=OneWay}">
                <ToolTipService.ToolTip>
-                    <TextBlock Text="{x:Bind _viewModel.CurrentSessionTime, Mode=OneWay}"/>
+                    <TextBlock Text="{x:Bind _viewModel.CurrentSessionTime, Mode=OneWay, Converter={StaticResource TimeToStringConverter}}"/>
                 </ToolTipService.ToolTip>
             </controls:RadialProgressBar>
         </RelativePanel>
