@@ -9,7 +9,6 @@ namespace DysproseTwo.Structs
     public struct DysproseGlobalSettings : IEquatable<DysproseGlobalSettings>
     {
         public double FontSize { get; set; }
-        public bool AreBackEditsDisabled { get; set; }
         public override bool Equals(object obj)
         {
             bool isEqual = false;
@@ -41,8 +40,7 @@ namespace DysproseTwo.Structs
 
         public bool Equals(DysproseGlobalSettings other)
         {
-            return this.FontSize == other.FontSize
-                && this.AreBackEditsDisabled == other.AreBackEditsDisabled;
+            return this.FontSize == other.FontSize;
         }
     }
 }

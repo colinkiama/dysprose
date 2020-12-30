@@ -2,11 +2,6 @@
 using DysproseTwo.Services;
 using DysproseTwo.Structs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Xaml;
 
 namespace DysproseTwo.Model
 {
@@ -31,7 +26,12 @@ namespace DysproseTwo.Model
         public Session()
         {
             var loadedSessionSettings = SettingsService.Instance.SessionSettings;
-            Settings = new DysproseSessionSettings {SessionLength = loadedSessionSettings.SessionLength , FadeInterval = loadedSessionSettings.FadeInterval};
+            Settings = new DysproseSessionSettings
+            {
+                SessionLength = loadedSessionSettings.SessionLength,
+                FadeInterval = loadedSessionSettings.FadeInterval,
+                AreBackEditsDisabled = loadedSessionSettings.AreBackEditsDisabled
+            };
             State = DysproseSessionState.Stopped;
             Timer = new SessionTimer(settings.SessionLength);
             Timer.TimerTicked += Timer_TimerTicked;

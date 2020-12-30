@@ -13,9 +13,10 @@ namespace DysproseTwo.Model
     {
         public event EventHandler<TimeSpan> TimerTicked;
         public event EventHandler TimerEnded;
-        DispatcherTimer timer;
+
+        readonly DispatcherTimer timer;
         long ticksPassed = 0;
-        long ticksToPass = 0;
+        readonly long ticksToPass = 0;
         DateTime lastTime = DateTime.MinValue;
 
 

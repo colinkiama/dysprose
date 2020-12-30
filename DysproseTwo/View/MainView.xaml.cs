@@ -64,13 +64,13 @@ namespace DysproseTwo.View
         {
             switch (_viewModel.CurrentSessionState)
             {
-                case Enums.DysproseSessionState.InProgress:
+                case DysproseSessionState.InProgress:
                     await _viewModel.PauseAsync();
                     break;
-                case Enums.DysproseSessionState.Paused:
+                case DysproseSessionState.Paused:
                     await _viewModel.ResumeAsync();
                     break;
-                case Enums.DysproseSessionState.Stopped:
+                case DysproseSessionState.Stopped:
                     await _viewModel.StartAsync(FadeTextBox);
                     break;
             }

@@ -164,20 +164,19 @@ namespace DysproseTwo.ViewModel
         private DysproseGlobalSettings GetGlobalSettingsFromViewModel() => new DysproseGlobalSettings
         {
             FontSize = this.FontSize,
-            AreBackEditsDisabled = this.AreBackEditsDisabled
         };
 
         private DysproseSessionSettings GetSessionSettingsFromViewModel() => new DysproseSessionSettings
         {
             FadeInterval = FadeIntervalValue,
-            SessionLength = new DysproseSessionLength { Length = _sessionLength, UnitOfLength = _selectedTimeUnit }
+            SessionLength = new DysproseSessionLength { Length = _sessionLength, UnitOfLength = _selectedTimeUnit }, 
+            AreBackEditsDisabled = this.AreBackEditsDisabled
         };
 
 
         private void AddGlobalSettingsToViewModel(DysproseGlobalSettings globalSettings)
         {
             FontSize = globalSettings.FontSize;
-            AreBackEditsDisabled = globalSettings.AreBackEditsDisabled;
         }
 
         private void AddSessionSettingsToViewModel(DysproseSessionSettings sessionSettings)
@@ -185,6 +184,7 @@ namespace DysproseTwo.ViewModel
             FadeIntervalValue = sessionSettings.FadeInterval;
             SessionLength = sessionSettings.SessionLength.Length;
             SelectedTimeUnit = sessionSettings.SessionLength.UnitOfLength;
+            AreBackEditsDisabled = sessionSettings.AreBackEditsDisabled;
         }
 
     }

@@ -69,6 +69,10 @@
                      Margin="0,20,0,0"
                          Text="{x:Bind _viewModel.FadeIntervalValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
+                <ToggleSwitch Header="Disable Back-Edits"
+                              Margin="0,20,0,0"
+                              IsOn="{x:Bind _viewModel.AreBackEditsDisabled, Mode=TwoWay}"
+                              IsEnabled="{x:Bind _viewModel.IsSessionNotInProgress, Mode=OneWay}"/>
                 <ComboBox Header="Font Size:"
                      Margin="0,20,0,0"
                      ItemsSource="{x:Bind _viewModel.FontList}"
@@ -82,9 +86,6 @@
                         Margin="0,4,0,0"
                         Name="FullScreenModeButton"
                         Click="FullScreenModeButton_Click"/>
-                <ToggleSwitch Header="Disable Back-Edits"
-                              Margin="0,20,0,0"
-                              IsOn="{x:Bind _viewModel.AreBackEditsDisabled, Mode=TwoWay}"/>
 
             </StackPanel>
         </ScrollViewer>
