@@ -1,21 +1,10 @@
-﻿using DysproseTwo.Dialogs;
-using DysproseTwo.Enums;
+﻿using DysproseTwo.Enums;
 using DysproseTwo.Services;
 using DysproseTwo.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -31,6 +20,55 @@ namespace DysproseTwo.View
         public MainView()
         {
             this.InitializeComponent();
+            //var coreWindow = CoreWindow.GetForCurrentThread();
+            //coreWindow.KeyDown += CancelPossibleBackEdits;
+            //coreWindow.KeyUp += CancelPossibleBackEdits;
+
+            //FadeTextBox.KeyDown += HandleFadeTextBoxKeyPress;
+            //FadeTextBox.KeyUp += HandleFadeTextBoxKeyPress;
+            FadeTextBox.PreviewKeyDown += HandleFadeTextBoxKeyPress;
+            FadeTextBox.PreviewKeyUp += HandleFadeTextBoxKeyPress;
+
+        }
+
+        private void HandleFadeTextBoxKeyPress(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Back
+                || e.Key == Windows.System.VirtualKey.Delete
+                || e.Key == Windows.System.VirtualKey.Left
+                || e.Key == Windows.System.VirtualKey.Right
+                || e.Key == Windows.System.VirtualKey.Up
+                || e.Key == Windows.System.VirtualKey.Down
+                || e.Key == Windows.System.VirtualKey.Home
+                || e.Key == Windows.System.VirtualKey.End
+                || e.Key == Windows.System.VirtualKey.PageUp
+                || e.Key == Windows.System.VirtualKey.PageDown)
+            {
+
+                e.Handled = true;
+
+            }
+        }
+
+
+
+        private void CancelPossibleBackEdits(CoreWindow sender, KeyEventArgs args)
+        {
+            if (FadeTextBox.FocusState != FocusState.Unfocused)
+            {
+                if (args.VirtualKey == Windows.System.VirtualKey.Back
+                               || args.VirtualKey == Windows.System.VirtualKey.Delete
+                               || args.VirtualKey == Windows.System.VirtualKey.Left
+                               || args.VirtualKey == Windows.System.VirtualKey.Right
+                               || args.VirtualKey == Windows.System.VirtualKey.Up
+                               || args.VirtualKey == Windows.System.VirtualKey.Down)
+                {
+                    if (!args.KeyStatus.IsMenuKeyDown)
+                    {
+                        args.Handled = true;
+                    }
+                }
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -96,5 +134,7 @@ namespace DysproseTwo.View
                 FadeTextBox.SelectionLength = 0;
             }
         }
+
+
     }
 }
