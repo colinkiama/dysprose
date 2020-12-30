@@ -25,6 +25,7 @@ namespace DysproseTwo.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            _viewModel.GetSettings();
         }
 
         private async void AboutButton_Click(object sender, RoutedEventArgs e)
