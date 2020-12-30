@@ -1,6 +1,7 @@
 ﻿using DysproseTwo.Enums;
 using DysproseTwo.Services;
 using DysproseTwo.ViewModel;
+using System;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -20,15 +21,21 @@ namespace DysproseTwo.View
         public MainView()
         {
             this.InitializeComponent();
-            //var coreWindow = CoreWindow.GetForCurrentThread();
-            //coreWindow.KeyDown += CancelPossibleBackEdits;
-            //coreWindow.KeyUp += CancelPossibleBackEdits;
-
-            //FadeTextBox.KeyDown += HandleFadeTextBoxKeyPress;
-            //FadeTextBox.KeyUp += HandleFadeTextBoxKeyPress;
+            
             FadeTextBox.PreviewKeyDown += HandleFadeTextBoxKeyPress;
             FadeTextBox.PreviewKeyUp += HandleFadeTextBoxKeyPress;
+            FadeTextBox.PointerPressed += HandleFadeTextBoxPointerClick;
+            FadeTextBox.PointerReleased += HandleFadeTextBoxPointerClick;
+        }
 
+        private void HandleFadeTextBoxPointerClick(object sender, PointerRoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                if(textBox.FocusState != FocusState.Unfocused)
+                {
+                }
+            }
         }
 
         private void HandleFadeTextBoxKeyPress(object sender, KeyRoutedEventArgs e)
@@ -132,6 +139,8 @@ namespace DysproseTwo.View
             if (_viewModel.CurrentSessionState != DysproseSessionState.Stopped)
             {
                 FadeTextBox.SelectionLength = 0;
+                // Do when on "no back-edits" mode
+                FadeTextBox.SelectionStart = FadeTextBox.Text.Length;
             }
         }
 
