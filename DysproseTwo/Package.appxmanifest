@@ -8,10 +8,10 @@
 
   <Identity
     Name="64942ColinKiama.Dysprose"
-    Publisher="CN=Colin Fuka Kiama, O=Colin Fuka Kiama, STREET=&quot;Flat 17 Adelaide House, 115 Grove Park&quot;, S=London, PostalCode=SE5 8LD, C=GB"
-    Version="2.1.3.0" />
+    Publisher="CN=D2DBA6D7-296F-484A-BABE-2B76C9C2AF78"
+    Version="2.2.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="b02ee598-9f42-4cfd-9ce8-7ebb251303e9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="3a57b6cc-02f3-4c1b-bf90-1c07a8bf8581" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Dysprose</DisplayName>
